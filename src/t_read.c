@@ -35,6 +35,7 @@ int		ft_check_contact(char *s)
 				contact++;
 			i++;
 		}
+		i++;
 		return (contact == 4 || contact == 6);
 	}
 }
@@ -58,7 +59,8 @@ int		ft_check_tetri(char *s, int count)
 	}
 	if (count == 21 && s[20] != '\n')
 		return (3);
-		
+	if (!(ft_check_contact(s)))
+			return (4);
 	return (0);
 }
 
