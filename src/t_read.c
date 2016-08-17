@@ -14,8 +14,8 @@
 #include "libft.h"
 
 /*
-Verifie que les caracteres des tetriminos sont en contact avc un autre block
-Si la fonction return 4 ou 6, le tetriminos est valide
+	Verifie que les caracteres des tetriminos sont en contact avc un autre block
+	Si la fonction return 4 ou 6, le tetriminos est valide
 */
 
 int		ft_check_contact(char *s)
@@ -39,13 +39,29 @@ int		ft_check_contact(char *s)
 	}
 }
 
-int		ft_check_tetri(char *s, int )
+/*
+	Verifie qu'un tetriminos est bien composé de 21 caracteres, un \n tout les 5 caracteres, les caracteres sont soit des "#" soit des "."
+*/
+int		ft_check_tetri(char *s, int count)
 {
 	int	i;
+	int c;
 
 	i = 0;
-
+	c = 0;
+	while (s)
+	{
+		if (s[i] != '#' || s[i] != '.')
+			return (1);
+		if (((i + 1 % 5) == 0) && s[i] != '\n')
+			return (2);
+	}
+	if (count == 21 && s[20] != '\n')
+		return (3);
+		
+	return (0);
 }
+
 t_list ft_read(int fd)
 {
 	char *buf;
