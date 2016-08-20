@@ -16,4 +16,11 @@
 # include "libft.h"
 # include <stdlib.h>
 
+typedef struct 	s_tetris
+{
+	int			t_x;
+	int			t_y;
+	char 		**pos;
+}				t_tetris;
+
 #endif
