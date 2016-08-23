@@ -15,12 +15,24 @@
 
 # include "libft.h"
 # include <stdlib.h>
+# include <unistd.h>
+
+typedef struct  s_coordonnees
+{
+	int			x;
+	int			y;
+
+}				t_coordonnees;
 
 typedef struct 	s_tetris
 {
-	int			t_x;
-	int			t_y;
+//	int			t_x;
+//	int			t_y;
 	char 		**pos;
 }				t_tetris;
+
+int				ft_check_contact(char *s);
+int 			ft_check_tetri(char *s, int count);
+t_list			ft_read(int fd);
 
 #endif
