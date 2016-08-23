@@ -13,6 +13,17 @@
 #include "fillit.h"
 #include "libft.h"
 
+
+/* La jdois reussir a lire un tetriminos mais wlh ca mcasse les couilles
+
+*/
+
+t_tetris ft_read_tetri(char *s)
+{
+	s_coordonnees t_x;
+	s_coordonnees t_y;	
+}
+
 /*
 	Verifie que les caracteres des tetriminos sont en contact avc un autre block
 	Si la fonction return 4 ou 6, le tetriminos est valide
@@ -46,10 +57,8 @@ int		ft_check_contact(char *s)
 int		ft_check_tetri(char *s, int count)
 {
 	int	i;
-	int c;
 
 	i = 0;
-	c = 0;
 	while (s[i])
 	{
 		if (s[i] != '#' || s[i] != '.')
