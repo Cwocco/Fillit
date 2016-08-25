@@ -15,13 +15,26 @@
 
 
 /* La jdois reussir a lire un tetriminos mais wlh ca mcasse les couilles
-
+1
 */
 
-t_tetris ft_read_tetri(char *s)
+void 		ft_check_piece(char *s,)
 {
-	s_coordonnees t_x;
-	s_coordonnees t_y;	
+	int i;
+
+	i = 0;
+}
+
+t_tetris	ft_read_tetri(char *s)
+{
+	int 			i;
+	s_coordonnees 	*t_y;
+	s_coordonnees 	*t_x;
+	char			**pos;
+
+	i = 0;
+	pos = (char *)malloc(sizeof(t_)) 
+
 }
 
 /*
@@ -29,7 +42,7 @@ t_tetris ft_read_tetri(char *s)
 	Si la fonction return 4 ou 6, le tetriminos est valide
 */
 
-int		ft_check_contact(char *s)
+int			ft_check_contact(char *s)
 {
 	int i;
 	int	contact;
@@ -54,7 +67,7 @@ int		ft_check_contact(char *s)
 /*
 	Verifie qu'un tetriminos est bien composé de 21 caracteres, un \n tout les 5 caracteres, les caracteres sont soit des "#" soit des "."
 */
-int		ft_check_tetri(char *s, int count)
+int			ft_check_tetri(char *s, int count)
 {
 	int	i;
 
@@ -76,7 +89,7 @@ int		ft_check_tetri(char *s, int count)
 	return (0);
 }
 
-t_list ft_read(int fd)
+t_list 		ft_read(int fd)
 {
 	char *buf;
 	t_list *list;
