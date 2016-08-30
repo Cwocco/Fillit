@@ -23,6 +23,10 @@ void 		ft_check_piece(char *s,)
 	int i;
 
 	i = 0;
+	while (s)
+		{
+				
+		}
 }
 
 t_tetris	ft_read_tetri(char *s)
