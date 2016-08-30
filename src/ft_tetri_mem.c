@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_tetri_mem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/10 13:37:31 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/02/19 12:39:54 by ada-cunh         ###   ########.fr       */
+/*   Created: 2016/08/30 20:14:35 by ada-cunh          #+#    #+#             */
+/*   Updated: 2016/08/30 20:14:45 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fillit.h"
 #include "libft.h"
 
-void	*ft_memalloc(size_t size)
+t_coord			*ft_new_point(int width, int height)
 {
-	void*mem;
+	t_coord 	*point;
 
-	if (size == 0)
-		return (NULL);
-	mem = NULL;
-	if ((mem = (void *)malloc(sizeof(*mem) * size)) == NULL)
-		return (NULL);
-	ft_bzero(mem, size);
-	return (mem);
+	point = (char *)malloc(sizeof(t_coord));
+	point->x = width;
+	point->y = height;
+	return (point);	
+}
+
+void			ft_free_tetri(t_tetris *tetri)
+{
+	int i;
+
+	i = 0;
+	while
 }

@@ -25,15 +25,15 @@ void 		ft_check_piece(char *s,)
 	i = 0;
 	while (s)
 		{
-				
+			y
 		}
 }
 
 t_tetris	ft_read_tetri(char *s)
 {
 	int 			i;
-	s_coordonnees 	*t_y;
-	s_coordonnees 	*t_x;
+	s_coord 		*t_y;
+	s_coord 		*t_x;
 	char			**pos;
 
 	i = 0;
@@ -53,7 +53,7 @@ int			ft_check_contact(char *s)
 
 	i = 0;
 	tetri = 0;
-	while (i < 20)
+	while (i <0 20)
 	{
 		while (s[i] == '#' || s[i] == '\n')
 		{
