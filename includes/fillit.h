@@ -17,12 +17,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct  s_coordonnees
+typedef struct  s_coord
 {
 	int			x;
 	int			y;
 
-}				t_coordonnees;
+}				t_coord;
 
 typedef struct 	s_tetris
 {
