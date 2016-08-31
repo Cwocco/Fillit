@@ -29,4 +29,5 @@ void			ft_free_tetri(t_tetris *tetri)
 
 	i = 0;
 	while
+		
 }

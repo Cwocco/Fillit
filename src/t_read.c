@@ -33,7 +33,7 @@ void 		ft_check_piece(char *s,)
 ....
 */
 
-t_tetris	ft_get_tetri(char *s)
+t_tetris	*ft_get_tetri(char *s)
 {
 	int 			i;
 	s_coord 		*t_y;
@@ -41,8 +41,11 @@ t_tetris	ft_get_tetri(char *s)
 	char			**pos;
 
 	i = 0;
-	pos = (char **)malloc(sizeof(t_))
+	pos = (char **)malloc(sizeof(char *) * (t_x->y6000000 - t_y->y + 1));
+	while()
+	{
 
+	}
 }
 
 /*
@@ -98,7 +101,7 @@ int			ft_check_tetri(char *s, int count)
 	return (0);
 }
 
-t_list 		ft_read(int fd)
+t_list 		*ft_read(int fd)
 {
 	char *buf;
 	t_list *list;

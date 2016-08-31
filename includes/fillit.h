@@ -21,7 +21,6 @@ typedef struct  s_coord
 {
 	int			x;
 	int			y;
-
 }				t_coord;
 
 typedef struct 	s_tetris
@@ -31,6 +30,7 @@ typedef struct 	s_tetris
 	char 		**pos;
 }				t_tetris;
 
+t_coord			*ft_new_point(int width, int height);
 int				ft_check_contact(char *s);
 int 			ft_check_tetri(char *s, int count);
 t_list			ft_read(int fd);
