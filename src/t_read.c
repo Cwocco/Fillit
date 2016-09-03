@@ -18,14 +18,17 @@
 
 */
 
-void 		ft_check_piece(char *s,)
+void 		ft_check_piece(char *s, t_coord *min, t_coord *max)
 {
 	int i;
 
 	i = 0;
-	while (s)
+	while (i < 20)
 		{
-			y
+			if(s[i] == '#')
+					{
+						
+					}
 		}
 }
 
@@ -36,12 +39,12 @@ void 		ft_check_piece(char *s,)
 t_tetris	*ft_get_tetri(char *s)
 {
 	int 			i;
-	s_coord 		*t_y;
-	s_coord 		*t_x;
+	t_coord 		*t_y;
+	t_coord 		*t_x;
 	char			**pos;
 
 	i = 0;
-	pos = (char **)malloc(sizeof(char *) * (t_x->y6000000 - t_y->y + 1));
+	pos = (char *)malloc(sizeof(char *) * (t_x->y - t_y->y + 1));
 	while()
 	{
 

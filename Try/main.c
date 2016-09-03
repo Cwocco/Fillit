@@ -19,4 +19,3 @@ int		main(void)
 	pos.y = 10;
 	print_coord(&pos);
 }
-
