@@ -21,14 +21,17 @@
 void 		ft_check_piece(char *s, t_coord *min, t_coord *max)
 {
 	int i;
+	int 
 
 	i = 0;
 	while (i < 20)
 		{
-			if(s[i] == '#')
-					{
-						
-					}
+			if (s[i] == '.' && s[i + 1] == '#')9
+				min->x = i;
+			if (s[i] == '#' && s[i + 1] == '.' && s[i])
+
+			i++;
+
 		}
 }
 
