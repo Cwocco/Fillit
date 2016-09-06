@@ -26,7 +26,7 @@ void 		ft_check_piece(char *s, t_coord *min, t_coord *max)
 	i = 0;
 	while (i < 20)
 		{
-			if (s[i] == '.' && s[i + 1] == '#')9
+			if (s[i] == '.' && s[i + 1] == '#')
 				min->x = i;
 			if (s[i] == '#' && s[i + 1] == '.' && s[i])
 
@@ -100,7 +100,7 @@ int			ft_check_tetri(char *s, int count)
 			return (3);
 		i++
 	}
-	if (count == 21 && s[20] != '\n')
+	if (count == 21 && s[20] != '\n' && s[21] != '\n')
 		return (4);
 	if (!(ft_check_contact(s)))
 			return (5);
