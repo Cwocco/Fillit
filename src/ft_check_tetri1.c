@@ -31,7 +31,9 @@ int square(char *s)
 	return (0);
 }
 
-/* no 14, check si la piece est une barre horizontale */
+/* no 14, check si la piece est une barre horizontale 
+check caractere 1 et 4
+*/
 
 int bar_hor(char *s)
 {
@@ -47,7 +49,9 @@ int bar_hor(char *s)
 	return (0);
 }
 
-/* no 13, check si la piece est une barre verticale */
+/* no 13, check si la piece est une barre verticale 
+check caractere 1 et 16
+*/
 
 int bar_ver(char *s)
 {
@@ -63,10 +67,11 @@ int bar_ver(char *s)
 	return (0);
 }
 
- /* no 12 , check la piece suivante 
+/* no 12 , check la piece suivante 
 	###
 	  #
- */
+
+*/
 
 int l1(char *s)
 {
@@ -75,7 +80,7 @@ int l1(char *s)
 	i = 0;
 	while (i < 20)
 	{
-		if (s[i] == '#' && s[i + 3] == '#')
+		if (s[i] == '#' && s[i + 2] == '#' && s[i + 7] == '#')
 			return (1);
 		i++;
 	}	
@@ -86,7 +91,7 @@ int l1(char *s)
 	##
 	#
 	#
- */
+*/
 
 int l2(char *s)
 {
