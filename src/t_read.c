@@ -21,7 +21,6 @@
 void 		ft_check_piece(char *s, t_coord *min, t_coord *max)
 {
 	int i;
-	int 
 
 	i = 0;
 	while (i < 20)

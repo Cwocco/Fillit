@@ -14,9 +14,9 @@
 #include "libft.h"
 
 
-/* no 15 */
+/* no 15, check si la piece est un carré */
 
-int ft_check_square(char *s)
+int square(char *s)
 {
 	int i;
 
@@ -31,25 +31,25 @@ int ft_check_square(char *s)
 	return (0);
 }
 
-/* no 14 */
+/* no 14, check si la piece est une barre horizontale */
 
-int ft_check_bar_hor(char *s)
+int bar_hor(char *s)
 {
 	int i;
 
 	i = 0;
 	while (i < 20)
 	{
-		if (s[i] == '#' && s[i + 4] == '#')
+		if (s[i] == '#' && s[i + 3] == '#')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-/* no 13 */
+/* no 13, check si la piece est une barre verticale */
 
-int ft_check_bar_ver(char *s)
+int bar_ver(char *s)
 {
 	int i;
 
@@ -63,7 +63,41 @@ int ft_check_bar_ver(char *s)
 	return (0);
 }
 
-int ft_L1(char *s)
+ /* no 12 , check la piece suivante 
+	###
+	  #
+ */
+
+int l1(char *s)
 {
-	
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 3] == '#')
+			return (1);
+		i++;
+	}	
+	return (0);
+}
+
+/* no 11, check la piece suivante 
+	##
+	#
+	#
+ */
+
+int l2(char *s)
+{
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 1] == '#' && s[i + 10] == '#')
+			return (1);
+		i++;
+	}
+	return (0);
 }
