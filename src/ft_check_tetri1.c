@@ -16,7 +16,7 @@
 
 /* no 15, check si la piece est un carré */
 
-int square(char *s)
+int 	square(char *s)
 {
 	int i;
 
@@ -35,7 +35,7 @@ int square(char *s)
 check caractere 1 et 4
 */
 
-int bar_hor(char *s)
+int 	bar_hor(char *s)
 {
 	int i;
 
@@ -53,7 +53,7 @@ int bar_hor(char *s)
 check caractere 1 et 16
 */
 
-int bar_ver(char *s)
+int 	bar_ver(char *s)
 {
 	int i;
 
@@ -73,7 +73,7 @@ int bar_ver(char *s)
 
 */
 
-int l1(char *s)
+int 	l1(char *s)
 {
 	int i;
 
@@ -93,7 +93,7 @@ int l1(char *s)
 	#
 */
 
-int l2(char *s)
+int 	l2(char *s)
 {
 	int i;
 
