@@ -54,12 +54,64 @@ int 	l4(char *s)
 	}
 }
 
+/* no 1, check la piece suivante
+	#
+	#
+	##
+*/
+
+int		l5(char *s)
+{
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 10] == '#' && s[i + 11] == '#')
+			return (1);
+		else
+			return (0);
+		i++;
+	}
+}
+
+/* no 2, check la piece suivante
+	###
+	#
+*/
+
+int		l6(char *s)
+{
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 2] == '#' && s[i + 5] == '#')
+			return (1);
+		else
+			return (0);
+		i++;
+	}
+}
 
 
+/* no 3, check la piece suivante
+	##
+	 #
+	 #
+*/
+int		l7(char *s)
+{
+	int i;
 
-
-
-
-
-
-
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 1] == '#' && s[i + 11] == '#')
+			return (1);
+		else
+			return (0);
+		i++;
+	}
+}
