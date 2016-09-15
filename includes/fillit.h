@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/08/14 14:42:06 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2016/09/15 14:49:05 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ int    			bar_ver(char *s);
 int    			l1(char *s);
 int    			l2(char *s);
 int				l3(char *s);
-int				l4(char *s);
-int				l5(char *s);
-int				l6(char *s);
 void			ft_check_piece(char *s, t_coord *min, t_coord *max);
 t_tetris		*ft_get_tetri(char *s);
 t_coord			*ft_new_point(int width, int height);
