@@ -28,6 +28,7 @@ int square(char *s)
 			return (1);
 		else 
 			return (0);
+		i++;
 	}
 }
 
@@ -46,6 +47,7 @@ int bar_hor(char *s)
 			return (1);
 		else
 			return (0);
+		i++;
 	}
 }
 
@@ -64,6 +66,7 @@ int bar_ver(char *s)
 			return (1);
 		else
 			return (0);
+		i++;
 	}
 }
 
@@ -83,6 +86,7 @@ int l1(char *s)
 			return (1);
 		else
 			return (0);
+		i++;
 	}
 }
 
@@ -103,5 +107,6 @@ int l2(char *s)
 			return (1);
 		else
 			return (0);
+		i++;
 	}
 }
