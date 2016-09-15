@@ -1,113 +1,128 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_square.c                                        :+:      :+:    :+:   */
+/*   ft_check_tetri2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/06 15:32:35 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/09/06 15:32:45 by ada-cunh         ###   ########.fr       */
+/*   Created: 2016/09/14 14:25:42 by ada-cunh          #+#    #+#             */
+/*   Updated: 2016/09/14 14:25:55 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
 
-
-/* no 15, check si la piece est un carré */
-
-int 	square(char *s)
-{
-	int i;
-
-	i = 0;
-	while (i < 20)
-	{
-		if (s[i] == '#' && s[i + 1] == '#' && s[i + 5] == '#' 
-			&& s[i + 6] == '#')
-			return (1);
-		else
-			return (0);
-		i++;
-	}
-}
-
-/* no 14, check si la piece est une barre horizontale 
-check caractere 1 et 4
-*/
-
-int 	bar_hor(char *s)
-{
-	int i;
-
-	i = 0;
-	while (i < 20)
-	{
-		if (s[i] == '#' && s[i + 3] == '#')
-			return (1);
-		else
-			return (0);
-		i++;
-	}
-}
-
-/* no 13, check si la piece est une barre verticale 
-check caractere 1 et 16
-*/
-
-int 	bar_ver(char *s)
-{
-	int i;
-
-	i = 0;
-	while (i < 20)
-	{
-		if (s[i] == '#' && s[i + 15] == '#')
-			return (1);
-		else
-			return (0);
-		i++;
-	}
-}
-
-/* no 12 , check la piece suivante 
+/* no 10, check la piece suivante
+	#
 	###
-	  #
-
 */
 
-int 	l1(char *s)
+int 	l3(char *s)
 {
 	int i;
 
 	i = 0;
 	while (i < 20)
 	{
-		if (s[i] == '#' && s[i + 2] == '#' && s[i + 7] == '#')
-			return (1);
-		else
-			return (0);
-		i++;
-	}	
-}
-
-/* no 11, check la piece suivante 
-	##
-	#
-	#
-*/
-
-int		l2(char *s)
-{
-	int i;
-
-	i = 0;
-	while (i < 20)
-	{
-		if (s[i] == '#' && s[i + 1] == '#' && s[i + 10] == '#')
+		if (s[i] == '#' && s[i + 5] = '#' && s[i + 7] == '#')
 			return (1);
 		else
 			return (0);
 		i++;
 	}
 }
+
+/* no 9, check la piece suivante
+	#
+	#
+   ##
+*/
+
+int 	l4(char *s)
+{
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 9] = '#' && s[i + 10] == '#')
+			return (1);
+		else
+			return (0);
+		i++;
+	}
+}
+
+/* no 1, check la piece suivante
+	#
+	#
+	##
+*/
+
+int		l5(char *s)
+{
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 10] == '#' && s[i + 11] == '#')
+			return (1);
+		else
+			return (0);
+		i++;
+	}
+}
+
+/* no 2, check la piece suivante
+	###
+	#
+*/
+
+int		l6(char *s)
+{
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 2] == '#' && s[i + 5] == '#')
+			return (1);
+		else
+			return (0);
+		i++;
+	}
+}
+
+/* no 3, check la piece suivante
+	##
+	 #
+	 #
+*/
+
+int		l7(char *s)
+{
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
