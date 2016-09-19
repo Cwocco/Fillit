@@ -16,7 +16,11 @@ INC =	-I./includes
 
 LIB =	-L./libft
 
-SRC =	t_reader.c
+SRC =	t_read.c \
+		ft_check_tetri1.c \
+		ft_check_tetri2.c \
+		ft_check_tetri3.c \
+		ft_check_tetri4.c \
 
 OBJ =	$(SRC:.c=.o)
 

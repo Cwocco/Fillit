@@ -100,9 +100,27 @@ int		stairs3(char *s)
 }
 
 
+/* no 8, check la piece suivante
+	#
+   ##
+   #
+*/
 
+int		strairs4(char *s)
+{
+	int i;
 
-
+	i = 0;
+	while (i < 20)
+	{
+		if (s[i] == '#' && s[i + 4] == '#' && s[i + 5] == '#'
+			&& s[i + 9] == '#')
+			return (1);
+		else
+			return (0);
+		i++;
+	}
+}
 
 
 

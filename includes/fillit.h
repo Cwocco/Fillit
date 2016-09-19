@@ -44,6 +44,7 @@ int				l8(char *s);
 int				strairs(char *s);
 int				stairs2(char *s);
 int				stairs3(char *s);
+int				stairs4(char *s);
 void			ft_check_piece(char *s, t_coord *min, t_coord *max);
 t_tetris		*ft_get_tetri(char *s);
 t_coord			*ft_new_point(int width, int height);
