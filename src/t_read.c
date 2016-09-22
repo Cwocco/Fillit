@@ -67,18 +67,20 @@ int			ft_check_contact(char *s)
 	contact = 0;
 	while (i < 20)
 	{
-		while (s[i] == '#' || s[i] == '\n')
+		while (s[i] == '#')
 		{
-			if (((s[i + 1] < 20) && (s[i + 1] == '#')) || 
-					((s[i + 5] < 20) && (s[i + 5] == '#')))
+			if ((i + 1) < 20 && (s[i + 1] == '#'))
 				contact++;
-			if (((s[i - 1] >= 0) && (s[i - 1] == '#')) || 
-					((s[i - 5] >= 0) && (s[i - 5] == '#')))
+			if ((i + 5) < 20 && (s[i + 5] == '#'))
+				contact++;
+			if ((i - 1) >= 0 && (s[i - 1] == '#'))
+				contact++;
+			if ((i - 5) >= 0 && (s[i - 5] == '#'))
 				contact++;
 		}
 		i++;
 	}
-	return (contact == 4 || contact == 6);
+	return (contact == 6 || contact == 8);
 }
 
 /*
