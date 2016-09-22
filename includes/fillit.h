@@ -13,7 +13,7 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# include "libft.h"
+//# include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -54,6 +54,6 @@ t_tetris		*ft_get_tetri(char *s);
 t_coord			*ft_new_point(int width, int height);
 int				ft_check_contact(char *s);
 int 			ft_check_tetri(char *s, int count);
-t_list			ft_read(int fd);
+//t_list			ft_read(int fd);
 
 #endif
