@@ -23,13 +23,15 @@ int square(char *s)
 	i = 0;
 	while (i < 20)
 	{
+			while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 1] == '#' && s[i + 5] == '#' 
 			&& s[i + 6] == '#')
 			return (1);
 		else 
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
 
 /* no 14, check si la piece est une barre horizontale 
@@ -43,12 +45,14 @@ int bar_hor(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 3] == '#')
 			return (1);
 		else
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
 
 /* no 13, check si la piece est une barre verticale 
@@ -62,12 +66,14 @@ int bar_ver(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 15] == '#')
 			return (1);
 		else
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
 
 /* no 12 , check la piece suivante 
@@ -82,12 +88,14 @@ int l1(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 2] == '#' && s[i + 7] == '#')
 			return (1);
 		else
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
 
 /* no 11, check la piece suivante 
@@ -103,10 +111,12 @@ int l2(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 1] == '#' && s[i + 10] == '#')
 			return (1);
 		else
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
