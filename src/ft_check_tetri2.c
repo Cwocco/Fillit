@@ -25,12 +25,14 @@ int 	l3(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 5] == '#' && s[i + 7] == '#')
 			return (1);
 		else 
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
 
 /* no 9, check la piece suviante
@@ -46,12 +48,14 @@ int 	l4(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 9] == '#' && s[i + 10] == '#')
 			return (1);
 		else
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
 
 /* no 1, check la piece suivante
@@ -67,12 +71,14 @@ int		l5(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 10] == '#' && s[i + 11] == '#')
 			return (1);
 		else
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
 
 /* no 2, check la piece suivante
@@ -87,12 +93,14 @@ int		l6(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 2] == '#' && s[i + 5] == '#')
 			return (1);
 		else
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
 
 
@@ -108,10 +116,12 @@ int		l7(char *s)
 	i = 0;
 	while (i < 20)
 	{
+		while (s[i] != '#')
+				i++;
 		if (s[i] == '#' && s[i + 1] == '#' && s[i + 11] == '#')
 			return (1);
 		else
-			return (0);
-		i++;
+			return (2);
 	}
+	return (0);
 }
