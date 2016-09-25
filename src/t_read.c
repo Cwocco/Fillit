@@ -91,7 +91,7 @@ int			ft_check_tetri(char *s, int count)
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (i < 20)
 	{
 		if (s[i] != '#' || s[i] != '.')
 			return (1);
@@ -101,7 +101,7 @@ int			ft_check_tetri(char *s, int count)
 			return (3);
 		i++
 	}
-	if (count == 21 && s[20] != '\n' && s[21] != '\n')
+	if (count == 21 && s[20] != '\n')
 		return (4);
 	if (!(ft_check_contact(s)))
 			return (5);

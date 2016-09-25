@@ -103,12 +103,12 @@ int		l6(char *s)
 	return (0);
 }
 
-
 /* no 3, check la piece suivante
 	##
 	 #
 	 #
 */
+
 int		l7(char *s)
 {
 	int i;

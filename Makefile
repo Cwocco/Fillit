@@ -21,12 +21,13 @@ SRC =	t_read.c \
 		ft_check_tetri2.c \
 		ft_check_tetri3.c \
 		ft_check_tetri4.c \
+		map.c \
 
 OBJ =	$(SRC:.c=.o)
 
 CC =	gcc
 
-FLg	=	-Wall -Werror -Wextra	
+FLG	=	-Wall -Werror -Wextra	
 
 all: $(NAME)
 

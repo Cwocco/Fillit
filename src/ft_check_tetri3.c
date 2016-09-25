@@ -64,7 +64,7 @@ int		stairs(char *s)
 	 #
 */
 
-int		strairs2(char *s)
+int		stairs2(char *s)
 {
 	int i;
 
@@ -112,7 +112,7 @@ int		stairs3(char *s)
    #
 */
 
-int		strairs4(char *s)
+int		stairs4(char *s)
 {
 	int i;
 
