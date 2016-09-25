@@ -96,7 +96,7 @@ int		stairs3(char *s)
 	{
 		while (s[i] != '#')
 				i++;
-		if (s[i] == '#' && s[i + 2] == '#' && s[i + 6] == '#' 
+		if (s[i] == '#' && s[i + 1] == '#' && s[i + 6] == '#' 
 			&& s[i + 7] == '#')
 			return (1);
 		else

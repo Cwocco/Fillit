@@ -84,6 +84,8 @@ int		cross4(char *s)
 	i = 0;
 	while (i < 20)
 	{
+			while (s[i] != '#')
+				i++;
 			if (s[i] == '#' && s[i + 4] == '#' && s[i + 6] == '#')
 				return (1);
 			else

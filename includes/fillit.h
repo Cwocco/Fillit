@@ -13,9 +13,10 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-//# include "libft.h"
+# include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 typedef struct  s_coord
 {
@@ -30,21 +31,25 @@ typedef struct 	s_tetris
 	char 		**pos;
 }				t_tetris;
 
+/* ft_check_tetri1 */
 int				square(char *s);
 int    			bar_hor(char *s);
 int    			bar_ver(char *s);
 int    			l1(char *s);
 int    			l2(char *s);
+/* ft_check_tetri2 */ 
 int				l3(char *s);
 int				l4(char *s);
 int				l5(char *s);
 int				l6(char *s);
 int				l7(char *s);
+/* ft_check_tetri3 */
 int				l8(char *s);
 int				strairs(char *s);
 int				stairs2(char *s);
 int				stairs3(char *s);
 int				stairs4(char *s);
+/* ft_check_tetri4 */
 int				cross(char *s);
 int				cross2(char *s);
 int				cross3(char *s);
