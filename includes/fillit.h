@@ -13,10 +13,11 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# include "libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
+# include	"libft.h"
+# include	<stdlib.h>
+# include	<unistd.h>
+# include	<fcntl.h>
+# define	BUFF_SIZE 20 	
 
 typedef struct  s_coord
 {

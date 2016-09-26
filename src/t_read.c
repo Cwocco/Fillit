@@ -18,7 +18,7 @@
 
 */
 
-void 		ft_check_piece(char *s, t_coord *min, t_coord *max)
+/*void 		ft_check_piece(char *s, t_coord *min, t_coord *max)
 {
 	int i;
 
