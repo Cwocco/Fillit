@@ -1,5 +1,14 @@
-header ..
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/24 23:21:32 by ada-cunh          #+#    #+#             */
+/*   Updated: 2016/11/24 23:21:38 by ada-cunh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fillit.h"
 
@@ -22,6 +31,8 @@ void		first_map(char **map, int map_size)
 		j++;
 	}
 }
+
+/* Malloc char**, prend en parametre la taille de la map */
 
 char		**malloc_map(int map_size)
 {

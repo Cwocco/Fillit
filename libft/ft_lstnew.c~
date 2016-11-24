@@ -6,7 +6,7 @@
 /*   By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 09:14:42 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/14 22:03:55 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2016/03/22 10:36:55 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list		*ft_lstnew(void const *content, size_t content_size)
 	if ((list = (t_list *)malloc(sizeof(t_list))) == NULL)
 		return (NULL);
 	if (content == NULL)
-	{
+	{0
 		list->content = NULL;
 		list->content_size = 0;
 	}

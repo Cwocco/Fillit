@@ -6,7 +6,7 @@
 #    By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/28 15:28:26 by ada-cunh          #+#    #+#              #
-#    Updated: 2016/07/28 15:28:28 by ada-cunh         ###   ########.fr        #
+#    Updated: 2016/11/24 23:24:34 by ada-cunh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,10 +17,6 @@ INC =	-I./includes
 LIB =	-L./libft
 
 SRC =	t_read.c \
-		ft_check_tetri1.c \
-		ft_check_tetri2.c \
-		ft_check_tetri3.c \
-		ft_check_tetri4.c \
 		map.c \
 
 OBJ =	$(SRC:.c=.o)
