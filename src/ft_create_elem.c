@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_create_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 23:23:29 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/28 22:19:00 by nboste           ###   ########.fr       */
+/*   Created: 2016/09/13 10:01:18 by nboste            #+#    #+#             */
+/*   Updated: 2016/11/28 22:06:04 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
-#include "libft.h"
+#include <stdlib.h>
+#include "ft_list.h"
 
-void ft_error(int e)
+list	*ft_create_elem(void *data)
 {
-	if (e == 1)
-	{
-		ft_putstr("usage: ./fillit source_file\n");
-		exit(EXIT_FAILURE);
-	}
-	else if (e == 2)
-	{
-		ft_putstr("error");
-		exit(EXIT_FAILURE);
-	}
+	list *elem;
+
+	elem = malloc(sizeof(list));
+	elem->next = NULL;
+	elem->data = data;
+	return (elem);
 }

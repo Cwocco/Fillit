@@ -6,15 +6,13 @@
 #    By: ada-cunh <ada-cunh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/04 11:23:17 by ada-cunh          #+#    #+#              #
-#    Updated: 2016/04/15 17:21:50 by ada-cunh         ###   ########.fr        #
+#*   Updated: 2016/11/28 16:25:43 by nboste           ###   ########.fr       *#
 #                                                                              #
 #******************************************************************************#
 
 CFLAGS	=-Wall -Wextra -Werror -I$(I) -O3
 
 NAME	=libft.a
-
-I = ./libft.h
 
 SRC		=	ft_putnbr.c \
 			ft_putchar.c \
@@ -81,8 +79,6 @@ SRC		=	ft_putnbr.c \
 			ft_lstmap.c \
 			ft_lstrev.c \
 			ft_iseven.c \
-
-H		=./libft.h
 
 OBJET	=$(SRC:.c=.o)
 

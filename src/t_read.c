@@ -6,18 +6,23 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/28 03:56:51 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2016/11/28 23:00:43 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include "ft_list.h"
 #include "libft.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 
 /*
-	Verifie que les caracteres des tetriminos sont en contact avc un autre block
-	Si la fonction return 4 ou 6, le tetriminos est valide
-*/
+   Verifie que les caracteres des tetriminos sont en contact avc un autre block
+   Si la fonction return 4 ou 6, le tetriminos est valide
+   */
 
 int			ft_check_contact(char *s)
 {
@@ -55,7 +60,7 @@ int ft_nb_tetri(char *s)
 	i = 0;
 	count_21 = 0;
 	while (s[i] != '\0')
-	{ 
+	{
 		if (s[i] == 21)
 		{
 			count_21++;
@@ -64,14 +69,14 @@ int ft_nb_tetri(char *s)
 		i++;
 	}
 	if (count_21 > 26)
-		return (NULL);
+		return (0);
 	return (count_21);
 }
 
 /*
-	Verifie qu'un tetriminos est bien composé de 21 caracteres, un \n tout les 5 caracteres, les caracteres sont soit des "#" soit des "."
-	Ici je bug brain un peu avc le parametre index, jcpu c'etait quoi mon idée avc, j'crois c'etait pour m'en servir dans le reader...	
-*/
+   Verifie qu'un tetriminos est bien composé de 21 caracteres, un \n tout les 5 caracteres, les caracteres sont soit des "#" soit des "."
+   Ici je bug brain un peu avc le parametre index, jcpu c'etait quoi mon idée avc, j'crois c'etait pour m'en servir dans le reader...
+   */
 int			ft_check_tetri(char *s) //(int index)
 {
 	int	i;
@@ -91,8 +96,8 @@ int			ft_check_tetri(char *s) //(int index)
 		i++;
 	}
 	//Ici index servira dans le read cf commentaire plus haut
-	if (/*index == 21*/ && s[20] != '\n' && s[21] != '\n')
-		return (4);
+	//	if (/*index == 21*/ && s[20] != '\n' && s[21] != '\n')
+	//		return (4);
 	if (!(ft_check_contact(s)))
 		return (5);
 	if (!(ft_nb_tetri(s)))
@@ -100,17 +105,50 @@ int			ft_check_tetri(char *s) //(int index)
 	return (0);
 }
 
-char 		*ft_read(int fd)
+list		*ft_read(char *path)
 {
-	char *buf;
-	int index;
-	/*Ici j'hesite a soit malloc les tetriminos un par un (21) et a mettre dans une boucle 
-	en fonction du nb de tetri lu (malloc(nb_tetri_lu * 21) ou de malloc 546, vu qu'on sait
-	qu'on peut recevoir que 26 tetriminos max (21 * 26 = 546)*/
-	//buf = (char *)malloc(sizeof(char *) * (21));
-	if (!(buf = (char *)malloc(sizeof(char) * (546))))
-		return (NULL);
-	if (!(index = read(fd, buf, 546)))
-		return (NULL);
-	// JSUIS FATIGUÉ JARRIVE PAS A REFLECHIR NIKSAMER
+	int		fd;
+	char	buffer[20];
+	list	*tetrs;
+
+	if((fd = open(path, O_RDONLY)) == -1)
+		ft_error(2);
+	tetrs = NULL;
+	while (read(fd, (void *)buffer, 20) > 0)
+	{
+		if (ft_check_tetri(buffer))
+		{
+			ft_list_push_back(&tetrs, (void *)get_tetr_map(buffer));
+			if (read(fd, (void *)buffer, 1) == 1 && buffer[0] != '\n')
+				ft_error(2);
+		}
+		else
+			ft_error(2);
+	}
+	return (tetrs);
+}
+
+char		*get_tetr_map(char *buffer)
+{
+	char	*map;
+	int		i;
+	int		j;
+
+	if(!(map = (char *)malloc(sizeof(char) * (16))))
+		ft_error(2);
+	i = 0;
+	j = 0;
+	while (i < 20)
+	{
+		if (j != 4 && j != 9 && j != 14)
+		{
+			if (buffer[j] == '#')
+				map[i] = 1;
+			else
+				map[i] = 0;
+			i++;
+		}
+		j++;
+	}
+	return (map);
 }
