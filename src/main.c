@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/24 23:27:25 by ada-cunh         ###   ########.fr       */
+/*   Created: 2016/11/28 05:02:32 by ada-cunh          #+#    #+#             */
+/*   Updated: 2016/11/28 05:03:30 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "fillit.h"
+#include "libft.h"
 
-//# include	"libft.h"
-# include	<stdlib.h>
-# include	<unistd.h>
-# include	<fcntl.h>
-# define	BUFF_SIZE 20 	
+int main(int argc, char **argv)
+{
+	int fd;
 
-t_coord			*ft_new_point(int width, int height);
-int				ft_check_contact(char *s);
-int 			ft_check_tetri(char *s, int count);
-int 			error(int e);
-char			*ft_read(int fd);
-int				ft_nb_tetri(char *s);
-
-#endif
+	if (argc != 2)
+		error(1);
+	if (!(ft_check_tetri(argv[1]) && ft_read(fd)))
+		error(2);
+	return (0);
+}
