@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/28 22:16:07 by nboste           ###   ########.fr       */
+/*   Updated: 2016/11/29 21:33:32 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ list			*ft_read(char *path);
 
 int				ft_nb_tetri(char *s);
 
-char			*get_tetr_map(char *buffer);
+char			*get_tetr_map(char *buffer, char letter);
+
+void			fillit_solve(list *l);
+
+void			reset_map(char **map);
 
 #endif

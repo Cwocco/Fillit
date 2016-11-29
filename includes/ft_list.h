@@ -6,7 +6,7 @@
 /*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/13 09:55:14 by nboste            #+#    #+#             */
-/*   Updated: 2016/11/28 22:08:08 by nboste           ###   ########.fr       */
+/*   Updated: 2016/11/29 21:31:14 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ typedef struct		so_list
 {
 	struct so_list	*next;
 	void			*data;
+	t_coord			coord;
+	t_coord			anchor;
 }					list;
 
 list				*ft_create_elem(void *data);

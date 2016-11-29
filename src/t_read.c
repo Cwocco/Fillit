@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/28 23:00:43 by nboste           ###   ########.fr       */
+/*   Updated: 2016/11/29 21:30:30 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,16 +110,21 @@ list		*ft_read(char *path)
 	int		fd;
 	char	buffer[20];
 	list	*tetrs;
+	char	letter;
 
 	if((fd = open(path, O_RDONLY)) == -1)
 		ft_error(2);
 	tetrs = NULL;
+	letter = 'A';
 	while (read(fd, (void *)buffer, 20) > 0)
 	{
 		if (ft_check_tetri(buffer))
 		{
-			ft_list_push_back(&tetrs, (void *)get_tetr_map(buffer));
+			ft_list_push_back(&tetrs, (void *)get_tetr_map(buffer, letter));
 			if (read(fd, (void *)buffer, 1) == 1 && buffer[0] != '\n')
+				ft_error(2);
+			letter++;
+			if (letter > 'Z')
 				ft_error(2);
 		}
 		else
@@ -128,7 +133,7 @@ list		*ft_read(char *path)
 	return (tetrs);
 }
 
-char		*get_tetr_map(char *buffer)
+char		*get_tetr_map(char *buffer, char letter)
 {
 	char	*map;
 	int		i;
@@ -143,7 +148,7 @@ char		*get_tetr_map(char *buffer)
 		if (j != 4 && j != 9 && j != 14)
 		{
 			if (buffer[j] == '#')
-				map[i] = 1;
+				map[i] = letter;
 			else
 				map[i] = 0;
 			i++;
