@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list.h                                          :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nboste <nboste@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/13 09:55:14 by nboste            #+#    #+#             */
-/*   Updated: 2016/11/29 22:42:19 by ada-cunh         ###   ########.fr       */
+/*   Created: 2016/11/29 22:38:56 by ada-cunh          #+#    #+#             */
+/*   Updated: 2016/11/30 02:08:53 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LIST_H
-# define FT_LIST_H
+#ifndef TYPES_H
+# define TYPES_H
 
-#include "types.h"
+typedef struct	s_coord
+{
+	int x;
+	int y;
+}				t_coord;
 
-list				*ft_create_elem(void *data);
-
-void				ft_list_push_back(list **begin_list, void *data);
+typedef struct		so_list
+{
+	struct so_list	*next;
+	void			*data;
+	t_coord			coord;
+	t_coord			anchor;
+}					list;
 
 #endif

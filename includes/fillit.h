@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/29 21:33:32 by nboste           ###   ########.fr       */
+/*   Updated: 2016/11/30 02:12:30 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,15 @@
 # define FILLIT_H
 
 #include "ft_list.h"
+#include "types.h"
 
 # define	BUFF_SIZE 20
-
-typedef struct	s_coord
-{
-	int x;
-	int y;
-}				t_coord;
 
 t_coord			*ft_new_point(int width, int height);
 
 int				ft_check_contact(char *s);
 
-int 			ft_check_tetri(char *s);
+int 			ft_check_tetri(char *buf);
 
 void			ft_error(int e);
 
