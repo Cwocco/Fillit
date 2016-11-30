@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/30 02:12:30 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2016/11/30 23:40:04 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "types.h"
 
 # define	BUFF_SIZE 20
+# define	MAP_W 104
 
 t_coord			*ft_new_point(int width, int height);
 
