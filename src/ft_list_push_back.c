@@ -24,7 +24,7 @@ void	ft_list_push_back(list **begin_list, void *data)
 		*begin_list = elem;
 	else
 	{
-		//Ici pas compris pk tu need tmp, tu alloues
+		//Ici pas compris pk tu need tmp, ta besoin de tmp pour passer au maillon suivant ?? tu peux pas utiliser *begin_list direct ?
 		while (tmp->next != NULL)
 			tmp = tmp->next;
 		(tmp)->next = elem;
