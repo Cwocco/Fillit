@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/30 23:40:04 by nboste           ###   ########.fr       */
+/*   Updated: 2016/12/01 05:04:56 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # define	BUFF_SIZE 20
 # define	MAP_W 104
+
+
+int superpose_check(list *tetrs, char **map, int map_size, int x, int y);
 
 t_coord			*ft_new_point(int width, int height);
 

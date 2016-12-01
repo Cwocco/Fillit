@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/30 05:12:58 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2016/12/01 01:42:30 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ list		*ft_read(char *path)
 	list	*tetrs;
 	char	letter;
 
-	if((fd = open(path, O_RDONLY)) == -1)
+	if ((fd = open(path, O_RDONLY)) == -1)
 		ft_error(2);
 	tetrs = NULL;
 	letter = 'A';

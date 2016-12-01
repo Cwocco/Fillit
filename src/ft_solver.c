@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2016/11/30 05:12:51 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2016/12/01 05:01:34 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,8 @@ void	reset_map(char **map)
 	}
 }
 
-/* C'etait vraiment pas clair dans ma tete avc les coordonnees de la piece, jvoyais pas
-   comment les placer
-   jpense c'est un truc genre coord->x; coord->y, je m emmele dans les struc jpense faut jrevois ca, j'ai essaye de faire un truc ecrit du coup, sorry 
-efface pas mon code degueu j'ai envie de comparer ce qu'on fera a ce que j'ai ecrit la*/
-
-char * backtrack(list *lst, char **map)
+/*
+char *ft_a_garder(list *lst, char **map)
 {
 	int i;
 
@@ -79,6 +75,37 @@ se servir  des struct dans types.h mais cest pas clair dans ma tete
 					 aire precedente et des qu on a la plus petite aire
 				 }
 		quand ya plus rien a read et si on a la plus petite aire on renvoi la map
-	}
-				
+	}				
 }
+*/
+
+
+list *backtrack(list *tetrs, char **map, int map_size)
+{
+	int x;
+	int y;
+	
+	x = 0;
+	y = 0;
+
+	if (!(tetrs && map))
+		ft_error(2);
+	while (map && (y < map_size))
+	{
+		while (map && (x < map_size))
+		{
+			if (add_tetrs(tetrs, map, anchor, map_size))
+			{
+				backtrack(tetrs->next, map, map_size);
+				del_tetrs(tetris, map, anchor, map_size);
+			}
+			x++;
+		}
+		y++;
+	}
+	// Ici j'voudrais faire remplir la map solve pour pouvor la print
+	return (map);
+}
+
+
+// Pour add_map faudra une fonction qui check si quand on add les tetriminos se superposent pas
