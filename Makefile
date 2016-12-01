@@ -6,7 +6,7 @@
 #    By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/28 15:28:26 by ada-cunh          #+#    #+#              #
-#*   Updated: 2016/11/28 22:25:12 by nboste           ###   ########.fr       *#
+#*   Updated: 2016/12/01 21:40:09 by nboste           ###   ########.fr       *#
 #                                                                              #
 #******************************************************************************#
 
@@ -36,9 +36,11 @@ $(NAME):
 	gcc -g -o $(NAME) $(OBJ) ./libft/libft.a
 
 clean:
+	make -C libft clean
 	rm -f $(OBJ)
 
 fclean: clean
+	make -C libft fclean
 	rm -f $(NAME)
 
 re: fclean all
