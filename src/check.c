@@ -49,5 +49,7 @@ int try_other_way(list *tetrs, char **map, int map_size, int x, int y)
 				pos = pos + 1; 
 			}
 	}
-	
 }
+
+//Est ce que je peux faire tetrs->pos[tetrs->x + tetrs-> y] pour pouvoir changer de pos
+// et etre sur la pos suivante d'un diese du tetrs
