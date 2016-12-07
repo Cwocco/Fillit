@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2016/12/06 22:42:41 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2016/12/07 04:19:49 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "ft_list.h"
 
-void	fillit_solve(list *l)
+void	fillit_solve(list *tetrs)
 {
 	char	**map;
 	char	*sol;
@@ -28,7 +28,7 @@ void	fillit_solve(list *l)
 		i++;
 	}
 	reset_map(map);
-	sol = backtrack(l, map);
+	sol = backtrack(tetrs, map);
 	ft_putstr(sol);
 }
 
