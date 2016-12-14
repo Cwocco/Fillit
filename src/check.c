@@ -12,23 +12,28 @@
 
 #include "fillit.h"
 
-
 int superpose_check(list *tetrs, char **map)
 {
 	// i = x, j = y;
+	int x;
+	int y;
 	int i;
 	int j;
 	
-	i = (tetrs->coord.x - tetrs->anchor.x);
-	j = (tetrs->coord.y - tetrs->anchor.y);
-	while (j < ((tetrs->coord.y - tetrs->anchor.y) + 3)
+	x = (tetrs->coord.x - tetrs->anchor.x);
+	y = (tetrs->coord.y - tetrs->anchor.y);
+	while (y < ((tetrs->coord.y - tetrs->anchor.y) + 3)
 	{
-		while (i < ((tetrs->coord.x - tetrs->anchor.x) + 3)
+		while (x < ((tetrs->coord.x - tetrs->anchor.x) + 3)
 		{
-			if (tetrs->coord)
-			i++;
+			if (Les coordonnées du tetriminos et 
+			si les coordonnee de lendroit ou je veux poser mon tetri sur la map sont = et
+			que sur ces meme coordonnee sur la map sont != 0 -> erreur)
+			// Maybe c'est caif ((tetrs->coord.y - tetrs->anchor.y) + 3 && map[y][x] = 0)
+				return (1);
+			x++;
 		}
-		j++;
+		y++;
 	}
 	return (0);
 }
