@@ -6,24 +6,26 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/12/07 04:15:29 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2016/12/14 05:22:09 by ada-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 
-int superpose_check(list *tetrs, char **map, int map_size, int x, int y)
+int superpose_check(list *tetrs, char **map)
 {
+	// i = x, j = y;
 	int i;
 	int j;
 	
-	i = 0;
-	j = 0;
-	while ((j < tetrs->y) && (y < map_size))
+	i = (tetrs->coord.x - tetrs->anchor.x);
+	j = (tetrs->coord.y - tetrs->anchor.y);
+	while (j < ((tetrs->coord.y - tetrs->anchor.y) + 3)
 	{
-		while (i < tetrs->x)
+		while (i < ((tetrs->coord.x - tetrs->anchor.x) + 3)
 		{
+			if (tetrs->coord)
 			i++;
 		}
 		j++;
@@ -31,6 +33,7 @@ int superpose_check(list *tetrs, char **map, int map_size, int x, int y)
 	return (0);
 }
 
+/*
 int try_other_way(list *tetrs, char **map, int map_size, int x, int y)
 {
 	// i = x, j = y
@@ -50,6 +53,6 @@ int try_other_way(list *tetrs, char **map, int map_size, int x, int y)
 			}
 	}
 }
-
+*/
 //Est ce que je peux faire tetrs->pos[tetrs->x + tetrs-> y] pour pouvoir changer de pos
 // et etre sur la pos suivante d'un diese du tetrs
