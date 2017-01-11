@@ -6,58 +6,92 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/12/14 05:22:09 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2017/01/12 00:46:08 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdlib.h>
 
-int superpose_check(list *tetrs, char **map)
+void	update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
 {
-	// i = x, j = y;
-	int x;
-	int y;
-	int i;
-	int j;
-	
-	x = (tetrs->coord.x - tetrs->anchor.x);
-	y = (tetrs->coord.y - tetrs->anchor.y);
-	while (y < ((tetrs->coord.y - tetrs->anchor.y) + 3)
+	t_2ipair	tmp;
+
+	tmp.x = 0;
+	while (tmp.x < 4)
 	{
-		while (x < ((tetrs->coord.x - tetrs->anchor.x) + 3)
+		tmp.y = 0;
+		while (tmp.y < 4)
 		{
-			if (Les coordonnées du tetriminos et 
-			si les coordonnee de lendroit ou je veux poser mon tetri sur la map sont = et
-			que sur ces meme coordonnee sur la map sont != 0 -> erreur)
-			// Maybe c'est caif ((tetrs->coord.y - tetrs->anchor.y) + 3 && map[y][x] = 0)
-				return (1);
-			x++;
+			map[tmp.x + pos.x - anchor.x][tmp.y + pos.y - anchor.y] = tetr[tmp.x + 4 * tmp.y];
+			tmp.y++;
 		}
-		y++;
+		tmp.x++;
 	}
-	return (0);
 }
 
-/*
-int try_other_way(list *tetrs, char **map, int map_size, int x, int y)
+int		add_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
 {
-	// i = x, j = y
-	int i;
-	int j;
-	int pos;
+	t_2ipair	tmp;
 
-	i = 0;
-	j = 0;
-	pos = tetrs->x + (tetrs->y * 4);
-	while (tetrs->pos != '\0' && y < map_size)
+	tmp.x = 0;
+	while (tmp.x < 4)
 	{
-		if (tetrs->pos == '\n')
+		tmp.y = 0;
+		while (tmp.y < 4)
+		{
+			if (tetr[tmp.x + 4 * tmp.y] &&
+				(tmp.x + pos.x - anchor.x < 0 ||
+				 tmp.x + pos.x - anchor.x >= MAP_W ||
+				 tmp.y + pos.y - anchor.y < 0 ||
+				 tmp.y + pos.y - anchor.y >= MAP_W ||
+				 map[tmp.x + pos.x - anchor.x][tmp.y + pos.y - anchor.y]))
+				return (0);
+			tmp.y++;
+		}
+		tmp.x++;
+	}
+	update_map(tetr, pos, anchor, map);
+	return (1);
+}
+
+void			update_sol(int *area, char ***sol, char **map)
+{
+	t_2ipair	tmp;
+	t_2ipair	max;
+
+	tmp.x = 0;
+	while (tmp.x < MAP_W)
+	{
+		tmp.y = 0;
+		while (tmp.y < MAP_W)
+		{
+			if (map[tmp.x][tmp.y])
 			{
-				y++;
-				pos = pos + 1; 
+				max.x = tmp.x > max.x ? tmp.x : max.x;
+				max.y = tmp.y > max.y ? tmp.y : max.y;
 			}
+			tmp.y++;
+		}
+		tmp.x++;
+	}
+	if (max.x * max.y < *area)
+	{
+		*area = max.x * max.y;
+		*sol = (char **)malloc(sizeof(char) * MAP_W);
+		tmp.x = 0;
+		while (tmp.x < MAP_W)
+			*sol[tmp.x++] = (char *)malloc(sizeof(char) * MAP_W);
+		tmp.x = 0;
+		tmp.y = 0;
+		while (tmp.x < MAP_W)
+		{
+			while (tmp.y < MAP_W)
+			{
+				*sol[tmp.x][tmp.y] = map[tmp.x][tmp.y];
+				tmp.y++;
+			}
+			tmp.x++;
+		}
 	}
 }
-*/
-//Est ce que je peux faire tetrs->pos[tetrs->x + tetrs-> y] pour pouvoir changer de pos
-// et etre sur la pos suivante d'un diese du tetrs

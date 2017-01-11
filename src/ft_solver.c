@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2016/12/07 04:19:49 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2017/01/12 00:45:42 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	fillit_solve(list *tetrs)
 {
 	char	**map;
-	char	*sol;
+	char	**sol;
 	int		i;
 
 	i = 0;
@@ -29,7 +29,7 @@ void	fillit_solve(list *tetrs)
 	}
 	reset_map(map);
 	sol = backtrack(tetrs, map);
-	ft_putstr(sol);
+	ft_putstr("END.\n");
 }
 
 void	reset_map(char **map)
@@ -50,35 +50,42 @@ void	reset_map(char **map)
 	}
 }
 
-
-
-
-list *backtrack(list *tetrs, char **map, int map_size)
+char		**backtrack(list *tetrs, char **map)
 {
-	int x;
-	int y;
-	
-	x = 0;
-	y = 0;
+	static int	area;
+	static char	**sol;
+	t_2ipair	pos;
+	t_2ipair	anchor;
+	char		*z;
 
-	if (!(tetrs && map))
-		ft_error(2);
-	while (map && (y < map_size))
+	pos.x = 0;
+	z = (char *)ft_memalloc(sizeof(char) * 16);
+	while (pos.x < MAP_W)
 	{
-		while (map && (x < map_size))
+		pos.y = 0;
+		while (pos.y < MAP_W)
 		{
-			if (add_tetrs(tetrs, map, x, y, map_size))
+			anchor.x = 0;
+			while (anchor.x < 4)
 			{
-				backtrack(tetrs->next, map, map_size);
-				del_tetrs(tetris, map, x, y, map_size);
+				anchor.y = 0;
+				while (anchor.y < 4)
+				{
+					if (add_tetr_map((char *)tetrs->data, pos, anchor, map))
+					{
+						if (tetrs->next)
+							backtrack(tetrs->next, map);
+						else
+							update_sol(&area, &sol, map);
+						update_map(z, pos, anchor, map);
+					}
+					anchor.y++;
+				}
+				anchor.x++;
 			}
-			x++;
+			pos.y++;
 		}
-		y++;
+		pos.x++;
 	}
-	// Ici j'voudrais faire remplir la map solve pour pouvoir la print
-	return (map);
+	return (sol);
 }
-
-
-// Pour add_map faudra une fonction qui check si quand on add les tetriminos se superposent pas

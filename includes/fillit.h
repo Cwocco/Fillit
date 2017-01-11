@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/12/14 05:23:04 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2017/01/12 00:44:56 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@
 # define	BUFF_SIZE 20
 # define	MAP_W 104
 
+typedef struct	s_2ipair
+{
+	int	x;
+	int	y;
+}				t_2ipair;
 
-int superpose_check(list *tetrs, char **map,);
+int				superpose_check(list *tetrs, char **map);
 
 int				ft_check_contact(char *s);
 
@@ -35,5 +40,13 @@ char			*get_tetr_map(char *buffer, char letter);
 void			fillit_solve(list *l);
 
 void			reset_map(char **map);
+
+void			update_sol(int *area, char ***sol, char **map);
+
+void			update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
+
+int				add_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
+
+char			**backtrack(list *tetrs, char **map);
 
 #endif

@@ -21,6 +21,8 @@ SRC =	src/main.c \
 		src/ft_create_elem.c \
 		src/ft_list_push_back.c \
 		src/ft_error.c \
+		src/ft_solver.c \
+		src/check.c \
 
 OBJ =	$(SRC:src/%.c=%.o)
 
