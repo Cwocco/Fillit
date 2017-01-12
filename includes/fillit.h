@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/12 00:44:56 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/12 03:48:54 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "types.h"
 
 # define	BUFF_SIZE 20
-# define	MAP_W 104
+# define	MAP_W 10
 
 typedef struct	s_2ipair
 {
@@ -47,6 +47,10 @@ void			update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
 
 int				add_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
 
+void			rm_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
+
 char			**backtrack(list *tetrs, char **map);
+
+int				get_area(char **map);
 
 #endif
