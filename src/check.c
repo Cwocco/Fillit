@@ -6,13 +6,14 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/12 04:12:17 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/13 02:08:48 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void	update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
 {
@@ -28,7 +29,7 @@ void	update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
 					&& tmp.y + pos.x - anchor.x >= 0
 					&& tmp.x + pos.y - anchor.y < MAP_W
 					&& tmp.y + pos.x - anchor.x < MAP_W
-					&& !map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x])
+					&& tetr[tmp.y + 4 * tmp.x])
 				map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x] = tetr[tmp.y + 4 * tmp.x];
 			tmp.y++;
 		}
@@ -72,12 +73,10 @@ void	rm_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
 		while (tmp.y < 4)
 		{
 			if (tetr[tmp.y + 4 * tmp.x] &&
-				(tmp.y + pos.x - anchor.x < 0 ||
-				 tmp.y + pos.x - anchor.x >= MAP_W ||
-				 tmp.x + pos.y - anchor.y < 0 ||
-				 tmp.x + pos.y - anchor.y >= MAP_W ||
-				 map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x]))
-
+				 tmp.y + pos.x - anchor.x >= 0 &&
+				 tmp.y + pos.x - anchor.x < MAP_W &&
+				 tmp.x + pos.y - anchor.y >= 0 &&
+				 tmp.x + pos.y - anchor.y < MAP_W)
 			map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x] = 0;
 			tmp.y++;
 		}
@@ -85,7 +84,7 @@ void	rm_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
 	}
 }
 
-void			update_sol(int *area, char ***sol, char **map)
+void			update_sol(int *area, char **sol, char **map)
 {
 	t_2ipair	tmp;
 	int			n_area;
@@ -94,17 +93,13 @@ void			update_sol(int *area, char ***sol, char **map)
 	if (n_area < *area)
 	{
 		*area = n_area;;
-		*sol = (char **)malloc(sizeof(char *) * MAP_W);
-		tmp.x = 0;
-		while (tmp.x < MAP_W)
-			(*sol)[tmp.x++] = (char *)malloc(sizeof(char) * MAP_W);
 		tmp.x = 0;
 		while (tmp.x < MAP_W)
 		{
 			tmp.y = 0;
 			while (tmp.y < MAP_W)
 			{
-				(*sol)[tmp.x][tmp.y] = map[tmp.x][tmp.y];
+				sol[tmp.x][tmp.y] = map[tmp.x][tmp.y];
 				tmp.y++;
 			}
 			tmp.x++;
@@ -136,5 +131,7 @@ int		get_area(char **map)
 	}
 	max.x += 1;
 	max.y += 1;
-	return (max.x * max.y);
+	if (max.x > max.y)
+	return (max.x * max.x);
+	return (max.y * max.y);
 }

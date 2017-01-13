@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/12/01 01:42:30 by ada-cunh         ###   ########.fr       */
+/*   Updated: 2017/01/13 00:34:19 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int ft_check_tetri(char *buf)
 	}
 	if (!(ft_check_contact(buf)))
 		return (1);
-	return (0);	
+	return (0);
 }
 
 list		*ft_read(char *path)
@@ -77,6 +77,7 @@ list		*ft_read(char *path)
 	char	buffer[20];
 	list	*tetrs;
 	char	letter;
+	int		flag;
 
 	if ((fd = open(path, O_RDONLY)) == -1)
 		ft_error(2);
@@ -84,6 +85,7 @@ list		*ft_read(char *path)
 	letter = 'A';
 	while (read(fd, (void *)buffer, 20) > 0)
 	{
+		flag = 0;
 		if (!ft_check_tetri(buffer))
 		{
 			ft_list_push_back(&tetrs, (void *)get_tetr_map(buffer, letter));
@@ -91,7 +93,7 @@ list		*ft_read(char *path)
 			{
 				if (buffer[0] != '\n')
 					ft_error(2);
-				buffer[0] = -128;
+				flag = 1;
 			}
 			letter++;
 			if (letter > 'Z')
@@ -99,26 +101,10 @@ list		*ft_read(char *path)
 		}
 		else
 			ft_error(2);
+		ft_bzero((void *)buffer, 20);
 	}
-	if (buffer[0] == -128)
+	if (flag || !tetrs)
 		ft_error(2);
-/* Test
-	while (tetrs)
-	{
-		int i = 0;
-		char* a = tetrs->data;
-		while (i < 16)
-		{
-			if (a[i] != 0)
-				ft_putchar(a[i]);
-			else
-				ft_putchar('.');
-			i++;
-		}
-		tetrs = tetrs->next;
-		ft_putchar('\n');
-	}
-*/
 	return (tetrs);
 }
 

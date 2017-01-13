@@ -33,16 +33,13 @@ FLG	=	-Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME):
-	make -C libft/
-	gcc -O3 $(FLG) -c $(SRC) -I $(INC) -I $(LIB)
+	gcc $(FLG) -c $(SRC) -I $(INC) -I $(LIB)
 	gcc -g -o $(NAME) $(OBJ) ./libft/libft.a
 
 clean:
-	make -C libft clean
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C libft fclean
 	rm -f $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/12 03:48:54 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/13 02:08:58 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ char			*get_tetr_map(char *buffer, char letter);
 
 void			fillit_solve(list *l);
 
-void			reset_map(char **map);
-
-void			update_sol(int *area, char ***sol, char **map);
+void			update_sol(int *area, char **sol, char **map);
 
 void			update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
 
@@ -49,8 +47,12 @@ int				add_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
 
 void			rm_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
 
-char			**backtrack(list *tetrs, char **map);
+void			backtrack(list *tetrs, char **map, char **sol);
 
 int				get_area(char **map);
+
+double			get_top_ratio(char **map);
+
+int				get_max_width(char **map);
 
 #endif

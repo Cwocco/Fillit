@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/12 04:33:17 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/13 02:15:28 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "ft_list.h"
 
-static int	get_max_width(char **map)
+int		get_max_width(char **map)
 {
 	t_2ipair	tmp;
 	t_2ipair	max;
@@ -49,15 +49,16 @@ void	fillit_solve(list *tetrs)
 	t_2ipair tmp;
 	t_2ipair max;
 
+	map = (char **)ft_memalloc(sizeof(char *) * MAP_W);
+	sol = (char **)ft_memalloc(sizeof(char *) * MAP_W);
 	i = 0;
-	map = malloc(sizeof(char*) * MAP_W);
 	while (i < MAP_W)
 	{
-		map[i] = malloc(sizeof(char) * MAP_W);
+		map[i] = (char *)ft_memalloc(sizeof(char) * MAP_W);
+		sol[i] = (char *)ft_memalloc(sizeof(char) * MAP_W);
 		i++;
 	}
-	reset_map(map);
-	sol = backtrack(tetrs, map);
+	backtrack(tetrs, map, sol);
 	max.x = get_max_width(sol);
 	tmp.x = 0;
 	while (tmp.x < max.x)
@@ -76,63 +77,47 @@ void	fillit_solve(list *tetrs)
 	}
 }
 
-void	reset_map(char **map)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < MAP_W)
-	{
-		while (j < MAP_W)
-		{
-			map[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-}
-
-char		**backtrack(list *tetrs, char **map)
+void	backtrack(list *tetrs, char **map, char **sol)
 {
 	static int	area;
-	static char	**sol;
+	static double ratio;
 	t_2ipair	pos;
 	t_2ipair	anchor;
 
 	if (!area)
+	{
 		area = 0x7fffffff;
+		ratio = 0x7fffffff;
+	}
 	pos.x = 0;
 	while (pos.x < MAP_W)
 	{
 		pos.y = 0;
 		while (pos.y < MAP_W)
 		{
-			anchor.x = 3;
-			while (anchor.x >= 0)
-			{
-				anchor.y = 3;
-				while (anchor.y >= 0)
+				anchor.x = 3;
+				while (anchor.x >= 0)
 				{
-					if (add_tetr_map((char *)tetrs->data, pos, anchor, map))
+					anchor.y = 3;
+					while (anchor.y >= 0)
 					{
-						if (get_area(map) < area)
+						if (add_tetr_map((char *)tetrs->data, pos, anchor, map))
 						{
-							if (tetrs->next)
-								backtrack(tetrs->next, map);
-							else
-								update_sol(&area, &sol, map);
+					//		if (get_area(map) < area)
+					//		{
+								if (tetrs->next != NULL)
+									backtrack(tetrs->next, map, sol);
+								else
+									update_sol(&area, sol, map);
+					//		}
+							rm_tetr_map((char *)tetrs->data, pos, anchor, map);
 						}
-						rm_tetr_map((char *)tetrs->data, pos, anchor, map);
+						anchor.y--;
 					}
-					anchor.y--;
+					anchor.x--;
 				}
-				anchor.x--;
-			}
 			pos.y++;
 		}
 		pos.x++;
 	}
-	return (sol);
 }
