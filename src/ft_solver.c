@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/13 02:15:28 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/16 00:57:48 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	fillit_solve(list *tetrs)
 		sol[i] = (char *)ft_memalloc(sizeof(char) * MAP_W);
 		i++;
 	}
-	backtrack(tetrs, map, sol);
+	backtrack(tetrs, map, sol, 2600);
 	max.x = get_max_width(sol);
 	tmp.x = 0;
 	while (tmp.x < max.x)
@@ -77,17 +77,18 @@ void	fillit_solve(list *tetrs)
 	}
 }
 
-void	backtrack(list *tetrs, char **map, char **sol)
+void	backtrack(list *tetrs, char **map, char **sol, double c)
 {
 	static int	area;
-	static double ratio;
+	static double	score;
+	static double	n_score;
 	t_2ipair	pos;
 	t_2ipair	anchor;
 
 	if (!area)
 	{
 		area = 0x7fffffff;
-		ratio = 0x7fffffff;
+		score = 0x7fffffff;
 	}
 	pos.x = 0;
 	while (pos.x < MAP_W)
@@ -103,13 +104,18 @@ void	backtrack(list *tetrs, char **map, char **sol)
 					{
 						if (add_tetr_map((char *)tetrs->data, pos, anchor, map))
 						{
-					//		if (get_area(map) < area)
-					//		{
+							n_score += c * (pos.x + 5 * pos.y - anchor.x - 5 * anchor.y);
+							if (get_area(map) < area || (get_area(map) == area &&  n_score < score))
+							{
 								if (tetrs->next != NULL)
-									backtrack(tetrs->next, map, sol);
+									backtrack(tetrs->next, map, sol, c / 10);
 								else
+								{
 									update_sol(&area, sol, map);
-					//		}
+									score = n_score;
+								}
+							}
+							n_score -= c * (pos.x + 5 * pos.y - anchor.x - 5 * anchor.y);
 							rm_tetr_map((char *)tetrs->data, pos, anchor, map);
 						}
 						anchor.y--;

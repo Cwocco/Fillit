@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/13 02:08:48 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/16 00:02:28 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,17 @@ void			update_sol(int *area, char **sol, char **map)
 	int			n_area;
 
 	n_area = get_area(map);
-	if (n_area < *area)
+	*area = n_area;;
+	tmp.x = 0;
+	while (tmp.x < MAP_W)
 	{
-		*area = n_area;;
-		tmp.x = 0;
-		while (tmp.x < MAP_W)
+		tmp.y = 0;
+		while (tmp.y < MAP_W)
 		{
-			tmp.y = 0;
-			while (tmp.y < MAP_W)
-			{
-				sol[tmp.x][tmp.y] = map[tmp.x][tmp.y];
-				tmp.y++;
-			}
-			tmp.x++;
+			sol[tmp.x][tmp.y] = map[tmp.x][tmp.y];
+			tmp.y++;
 		}
+		tmp.x++;
 	}
 }
 
@@ -132,6 +129,6 @@ int		get_area(char **map)
 	max.x += 1;
 	max.y += 1;
 	if (max.x > max.y)
-	return (max.x * max.x);
+		return (max.x * max.x);
 	return (max.y * max.y);
 }
