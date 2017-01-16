@@ -6,23 +6,16 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/13 00:34:19 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/16 03:13:41 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "ft_list.h"
 #include "libft.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-
-
-/*
-   Verifie que les caracteres des tetriminos sont en contact avc un autre block
-   Si la fonction return 4 ou 6, le tetriminos est valide
-   */
 
 int			ft_check_contact(char *s)
 {
@@ -49,10 +42,6 @@ int			ft_check_contact(char *s)
 	return (contact == 6 || contact == 8);
 }
 
-
-/*
-  Verifie qu'un tetriminos est bien composé de 21 caracteres, un \n tout les 5 caracteres, les caracteres sont soit des "#" soit des "." */
-
 int ft_check_tetri(char *buf)
 {
 	int i;
@@ -71,11 +60,11 @@ int ft_check_tetri(char *buf)
 	return (0);
 }
 
-list		*ft_read(char *path)
+t_list		*ft_read(char *path)
 {
 	int		fd;
 	char	buffer[20];
-	list	*tetrs;
+	t_list	*tetrs;
 	char	letter;
 	int		flag;
 
@@ -83,12 +72,15 @@ list		*ft_read(char *path)
 		ft_error(2);
 	tetrs = NULL;
 	letter = 'A';
+	flag = 0;
 	while (read(fd, (void *)buffer, 20) > 0)
 	{
 		flag = 0;
+		if (letter > 'Z')
+			ft_error(2);
 		if (!ft_check_tetri(buffer))
 		{
-			ft_list_push_back(&tetrs, (void *)get_tetr_map(buffer, letter));
+			ft_lst_push_back(&tetrs, (void *)get_tetr_map(buffer, letter), 16);
 			if (read(fd, (void *)buffer, 1) == 1)
 			{
 				if (buffer[0] != '\n')
@@ -96,8 +88,6 @@ list		*ft_read(char *path)
 				flag = 1;
 			}
 			letter++;
-			if (letter > 'Z')
-				ft_error(2);
 		}
 		else
 			ft_error(2);

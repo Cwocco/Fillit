@@ -6,13 +6,12 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/16 00:57:48 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/16 02:49:09 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
-#include "ft_list.h"
 
 int		get_max_width(char **map)
 {
@@ -41,7 +40,7 @@ int		get_max_width(char **map)
 	return (max.x > max.y ? max.x : max.y);
 }
 
-void	fillit_solve(list *tetrs)
+void	fillit_solve(t_list *tetrs)
 {
 	char	**map;
 	char	**sol;
@@ -77,9 +76,9 @@ void	fillit_solve(list *tetrs)
 	}
 }
 
-void	backtrack(list *tetrs, char **map, char **sol, double c)
+void	backtrack(t_list *tetrs, char **map, char **sol, double c)
 {
-	static int	area;
+	static int		area;
 	static double	score;
 	static double	n_score;
 	t_2ipair	pos;
@@ -102,10 +101,11 @@ void	backtrack(list *tetrs, char **map, char **sol, double c)
 					anchor.y = 3;
 					while (anchor.y >= 0)
 					{
-						if (add_tetr_map((char *)tetrs->data, pos, anchor, map))
+						if (add_tetr_map((char *)tetrs->content, pos, anchor, map))
 						{
+							int a = get_area(map);
 							n_score += c * (pos.x + 5 * pos.y - anchor.x - 5 * anchor.y);
-							if (get_area(map) < area || (get_area(map) == area &&  n_score < score))
+							if (a < area || (a == area &&  n_score < score))
 							{
 								if (tetrs->next != NULL)
 									backtrack(tetrs->next, map, sol, c / 10);
@@ -116,7 +116,7 @@ void	backtrack(list *tetrs, char **map, char **sol, double c)
 								}
 							}
 							n_score -= c * (pos.x + 5 * pos.y - anchor.x - 5 * anchor.y);
-							rm_tetr_map((char *)tetrs->data, pos, anchor, map);
+							rm_tetr_map((char *)tetrs->content, pos, anchor, map);
 						}
 						anchor.y--;
 					}

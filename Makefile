@@ -6,25 +6,24 @@
 #    By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/28 15:28:26 by ada-cunh          #+#    #+#              #
-#*   Updated: 2016/12/01 21:40:09 by nboste           ###   ########.fr       *#
+#*   Updated: 2017/01/16 02:51:01 by nboste           ###   ########.fr       *#
 #                                                                              #
 #******************************************************************************#
 
 NAME =	fillit
 
-INC =	./includes
+INC =	-I./includes \
+		-I./libft/includes \
 
-LIB =	./libft
+LIB =	-L./libft \
 
-SRC =	src/main.c \
-		src/t_read.c \
-		src/ft_create_elem.c \
-		src/ft_list_push_back.c \
-		src/ft_error.c \
-		src/ft_solver.c \
-		src/check.c \
+SRC =	srcs/main.c \
+		srcs/read.c \
+		srcs/error.c \
+		srcs/solver.c \
+		srcs/utility.c \
 
-OBJ =	$(SRC:src/%.c=%.o)
+OBJ =	$(SRC:srcs/%.c=obj/%.o)
 
 CC =	gcc
 
@@ -33,8 +32,8 @@ FLG	=	-Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME):
-	gcc $(FLG) -c $(SRC) -I $(INC) -I $(LIB)
-	gcc -g -o $(NAME) $(OBJ) ./libft/libft.a
+	make -C libft
+	$(CC) $(FLG) $(LIB) $(INC) $(SRC) -lft -o $(NAME) -O3 -g
 
 clean:
 	rm -f $(OBJ)
