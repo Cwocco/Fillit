@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/16 03:58:26 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/16 04:10:33 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_list		*ft_read(char *path)
 				ft_error(2);
 			path = (char *)1;
 		}
+		ft_bzero(buffer, 20);
 	}
 	if (path || !tetrs)
 		ft_error(2);
