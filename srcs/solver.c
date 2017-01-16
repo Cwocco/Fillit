@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/16 02:49:09 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/16 04:05:04 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,11 @@ int		get_max_width(char **map)
 	return (max.x > max.y ? max.x : max.y);
 }
 
-void	fillit_solve(t_list *tetrs)
+void			print_sol(char **sol)
 {
-	char	**map;
-	char	**sol;
-	int		i;
-	t_2ipair tmp;
-	t_2ipair max;
+	t_2ipair	max;
+	t_2ipair	tmp;
 
-	map = (char **)ft_memalloc(sizeof(char *) * MAP_W);
-	sol = (char **)ft_memalloc(sizeof(char *) * MAP_W);
-	i = 0;
-	while (i < MAP_W)
-	{
-		map[i] = (char *)ft_memalloc(sizeof(char) * MAP_W);
-		sol[i] = (char *)ft_memalloc(sizeof(char) * MAP_W);
-		i++;
-	}
-	backtrack(tetrs, map, sol, 2600);
 	max.x = get_max_width(sol);
 	tmp.x = 0;
 	while (tmp.x < max.x)
@@ -74,6 +61,25 @@ void	fillit_solve(t_list *tetrs)
 		ft_putchar('\n');
 		tmp.x++;
 	}
+}
+
+void	fillit_solve(t_list *tetrs)
+{
+	char	**map;
+	char	**sol;
+	int		i;
+
+	map = (char **)ft_memalloc(sizeof(char *) * MAP_W);
+	sol = (char **)ft_memalloc(sizeof(char *) * MAP_W);
+	i = 0;
+	while (i < MAP_W)
+	{
+		map[i] = (char *)ft_memalloc(sizeof(char) * MAP_W);
+		sol[i] = (char *)ft_memalloc(sizeof(char) * MAP_W);
+		i++;
+	}
+	backtrack(tetrs, map, sol, 2600);
+	print_sol(sol);
 }
 
 void	backtrack(t_list *tetrs, char **map, char **sol, double c)

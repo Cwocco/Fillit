@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/16 03:13:41 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/16 03:58:26 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,34 +66,25 @@ t_list		*ft_read(char *path)
 	char	buffer[20];
 	t_list	*tetrs;
 	char	letter;
-	int		flag;
 
 	if ((fd = open(path, O_RDONLY)) == -1)
 		ft_error(2);
 	tetrs = NULL;
 	letter = 'A';
-	flag = 0;
 	while (read(fd, (void *)buffer, 20) > 0)
 	{
-		flag = 0;
-		if (letter > 'Z')
+		path = 0;
+		if (letter > 'Z' || ft_check_tetri(buffer))
 			ft_error(2);
-		if (!ft_check_tetri(buffer))
+		ft_lst_push_back(&tetrs, (void *)get_tetr_map(buffer, letter++), 16);
+		if (read(fd, (void *)buffer, 1) == 1)
 		{
-			ft_lst_push_back(&tetrs, (void *)get_tetr_map(buffer, letter), 16);
-			if (read(fd, (void *)buffer, 1) == 1)
-			{
-				if (buffer[0] != '\n')
-					ft_error(2);
-				flag = 1;
-			}
-			letter++;
+			if (buffer[0] != '\n')
+				ft_error(2);
+			path = (char *)1;
 		}
-		else
-			ft_error(2);
-		ft_bzero((void *)buffer, 20);
 	}
-	if (flag || !tetrs)
+	if (path || !tetrs)
 		ft_error(2);
 	return (tetrs);
 }
