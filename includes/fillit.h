@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/17 23:12:43 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:22:09 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 
 # define	BUFF_SIZE 20
 # define	MAP_W 10
+
+typedef struct	s_tetr
+{
+	t_2ipair	size;
+	char		*tetr;
+}				t_tetr;
 
 int				ft_check_contact(char *s);
 
