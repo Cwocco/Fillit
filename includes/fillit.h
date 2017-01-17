@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/17 23:22:09 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:26:39 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void			ft_error(int e);
 
 t_list			*ft_read(char *path);
 
-
 char			*get_tetr_map(char *buffer, char letter);
+
 
 void			update_sol(int *area, char **sol, char **map);
 
-void			update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map, t_bool mode);
+void			update_map(t_tetr *tetr, t_2ipair pos, char **map, t_bool mode);
 
-int				add_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
+int				add_tetr_map(t_tetr *tetr, t_2ipair pos, char **map);
 
 int				get_max_width(char **map);
 

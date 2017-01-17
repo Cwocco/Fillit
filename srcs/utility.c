@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/17 23:14:22 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:29:04 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map, t_bool mode)
+void	update_map(t_tetr *tetr, t_2ipair pos, char **map, t_bool mode)
 {
 	t_2ipair	tmp;
 
 	tmp.x = 0;
-	while (tmp.x < 4)
+	while (tmp.x < tetr->size.y)
 	{
 		tmp.y = 0;
-		while (tmp.y < 4)
+		while (tmp.y < tetr->size.x)
 		{
-			if (tmp.x + pos.y - anchor.y >= 0
-					&& tmp.y + pos.x - anchor.x >= 0
-					&& tmp.x + pos.y - anchor.y < MAP_W
-					&& tmp.y + pos.x - anchor.x < MAP_W
-					&& tetr[tmp.y + 4 * tmp.x])
+			if (tmp.x + pos.y >= 0
+					&& tmp.y + pos.x >= 0
+					&& tmp.x + pos.y < MAP_W
+					&& tmp.y + pos.x < MAP_W
+					&& tetr->tetr[tmp.y + 4 * tmp.x])
 			{
 				if (!mode)
-					map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x] = tetr[tmp.y + 4 * tmp.x];
+					map[tmp.x + pos.y][tmp.y + pos.x] = tetr->tetr[tmp.y + 4 * tmp.x];
 				else
-					map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x] = 0;
+					map[tmp.x + pos.y][tmp.y + pos.x] = 0;
 			}
 			tmp.y++;
 		}
@@ -42,28 +42,28 @@ void	update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map, t_bool mo
 	}
 }
 
-int		add_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
+int		add_tetr_map(t_tetr *tetr, t_2ipair pos, char **map)
 {
 	t_2ipair	tmp;
 
 	tmp.x = 0;
-	while (tmp.x < 4)
+	while (tmp.x < tetr->size.y)
 	{
 		tmp.y = 0;
-		while (tmp.y < 4)
+		while (tmp.y < tetr->size.x)
 		{
-			if (tetr[tmp.y + 4 * tmp.x] &&
-				(tmp.y + pos.x - anchor.x < 0 ||
-				 tmp.y + pos.x - anchor.x >= MAP_W ||
-				 tmp.x + pos.y - anchor.y < 0 ||
-				 tmp.x + pos.y - anchor.y >= MAP_W ||
-				 map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x]))
+			if (tetr->tetr[tmp.y + 4 * tmp.x] &&
+				(tmp.y + pos.x < 0 ||
+				 tmp.y + pos.x >= MAP_W ||
+				 tmp.x + pos.y < 0 ||
+				 tmp.x + pos.y >= MAP_W ||
+				 map[tmp.x + pos.y][tmp.y + pos.x]))
 				return (0);
 			tmp.y++;
 		}
 		tmp.x++;
 	}
-	update_map(tetr, pos, anchor, map, 0);
+	update_map(tetr, pos, map, 0);
 	return (1);
 }
 

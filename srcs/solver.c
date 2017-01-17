@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/17 23:14:05 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:33:35 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	backtrack(t_list *tetrs, char **map, char **sol, double c)
 	static int		area;
 	static double	score;
 	static double	n_score;
-	t_2ipair	pos;
-	t_2ipair	anchor;
+	t_2ipair		pos;
+	int				a;
 
 	if (!area)
 	{
@@ -51,34 +51,24 @@ void	backtrack(t_list *tetrs, char **map, char **sol, double c)
 		pos.y = 0;
 		while (pos.y < MAP_W)
 		{
-				anchor.x = 3;
-				while (anchor.x >= 0)
+			if (add_tetr_map((t_tetr *)tetrs->content, pos, map))
+			{
+				a = get_max_width(map);
+				a *= a;
+				n_score += c * (pos.x + 5 * pos.y);
+				if (a < area || (a == area &&  n_score < score))
 				{
-					anchor.y = 3;
-					while (anchor.y >= 0)
+					if (tetrs->next != NULL)
+						backtrack(tetrs->next, map, sol, c / 10);
+					else
 					{
-						if (add_tetr_map((char *)tetrs->content, pos, anchor, map))
-						{
-							int a = get_max_width(map);
-							a *= a;
-							n_score += c * (pos.x + 5 * pos.y - anchor.x - 5 * anchor.y);
-							if (a < area || (a == area &&  n_score < score))
-							{
-								if (tetrs->next != NULL)
-									backtrack(tetrs->next, map, sol, c / 10);
-								else
-								{
-									update_sol(&area, sol, map);
-									score = n_score;
-								}
-							}
-							n_score -= c * (pos.x + 5 * pos.y - anchor.x - 5 * anchor.y);
-							update_map((char *)tetrs->content, pos, anchor, map, 1);
-						}
-						anchor.y--;
+						update_sol(&area, sol, map);
+						score = n_score;
 					}
-					anchor.x--;
 				}
+				n_score -= c * (pos.x + 5 * pos.y);
+				update_map((t_tetr *)tetrs->content, pos, map, 1);
+			}
 			pos.y++;
 		}
 		pos.x++;
