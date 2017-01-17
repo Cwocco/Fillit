@@ -36,9 +36,11 @@ $(NAME):
 	$(CC) $(FLG) $(LIB) $(INC) $(SRC) -lft -o $(NAME) -O3 -g
 
 clean:
+	make -C libft clean
 	rm -f $(OBJ)
 
 fclean: clean
+	rm -f libft/libft.a
 	rm -f $(NAME)
 
 re: fclean all

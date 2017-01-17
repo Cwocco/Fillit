@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/18 00:09:12 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 00:30:40 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		updt_static_value(t_static_backtrack *v, char **map, double val)
 	v->n_score += val;
 }
 
-void	fillit_solve(t_list *tetrs)
+void			fillit_solve(t_list *tetrs)
 {
 	char	**map;
 	char	**sol;
@@ -45,7 +45,7 @@ void	fillit_solve(t_list *tetrs)
 	print_sol(sol);
 }
 
-void	backtrack(t_list *tetrs, char **map, char **sol, double c)
+void			backtrack(t_list *tetrs, char **map, char **sol, double c)
 {
 	static t_static_backtrack	v;
 	t_2ipair					pos;
@@ -60,7 +60,8 @@ void	backtrack(t_list *tetrs, char **map, char **sol, double c)
 			if (add_tetr_map((t_tetr *)tetrs->content, pos, map))
 			{
 				updt_static_value(&v, map, c * (pos.x + 5 * pos.y));
-				if (v.n_area < v.area || (v.n_area == v.area &&  v.n_score < v.score))
+				if (v.n_area < v.area
+						|| (v.n_area == v.area && v.n_score < v.score))
 				{
 					if (tetrs->next != NULL)
 						backtrack(tetrs->next, map, sol, c / 10);

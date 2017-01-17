@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/17 23:48:11 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 00:29:01 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft.h"
 
-# define	BUFF_SIZE 20
-# define	MAP_W 10
+# define BUFF_SIZE 20
+# define MAP_W 10
 
 typedef struct	s_tetr
 {
@@ -34,14 +34,13 @@ typedef struct	s_static_backtrack
 
 int				ft_check_contact(char *s);
 
-int 			ft_check_tetri(char *buf);
+int				ft_check_tetri(char *buf);
 
 void			ft_error(int e);
 
 t_list			*ft_read(char *path);
 
 char			*get_tetr_map(char *buffer, char letter);
-
 
 void			update_sol(t_static_backtrack *v, char **sol, char **map);
 
@@ -52,7 +51,6 @@ int				add_tetr_map(t_tetr *tetr, t_2ipair pos, char **map);
 int				get_max_width(char **map);
 
 void			print_sol(char **sol);
-
 
 void			fillit_solve(t_list *l);
 

@@ -6,14 +6,14 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 23:23:29 by ada-cunh          #+#    #+#             */
-/*   Updated: 2016/11/28 22:19:00 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 00:29:23 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
 
-void ft_error(int e)
+void	ft_error(int e)
 {
 	if (e == 1)
 	{

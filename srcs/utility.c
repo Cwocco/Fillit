@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/17 23:48:15 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 00:34:49 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 void	update_map(t_tetr *tetr, t_2ipair pos, char **map, t_bool mode)
 {
 	t_2ipair	tmp;
+	char		*t;
 
 	tmp.x = 0;
 	while (tmp.x < tetr->size.y)
@@ -31,8 +32,9 @@ void	update_map(t_tetr *tetr, t_2ipair pos, char **map, t_bool mode)
 					&& tmp.y + pos.x < MAP_W
 					&& tetr->tetr[tmp.y + 4 * tmp.x])
 			{
+				t = tetr->tetr;
 				if (!mode)
-					map[tmp.x + pos.y][tmp.y + pos.x] = tetr->tetr[tmp.y + 4 * tmp.x];
+					map[tmp.x + pos.y][tmp.y + pos.x] = t[tmp.y + 4 * tmp.x];
 				else
 					map[tmp.x + pos.y][tmp.y + pos.x] = 0;
 			}
@@ -52,12 +54,12 @@ int		add_tetr_map(t_tetr *tetr, t_2ipair pos, char **map)
 		tmp.y = 0;
 		while (tmp.y < tetr->size.x)
 		{
-			if (tetr->tetr[tmp.y + 4 * tmp.x] &&
-				(tmp.y + pos.x < 0 ||
-				 tmp.y + pos.x >= MAP_W ||
-				 tmp.x + pos.y < 0 ||
-				 tmp.x + pos.y >= MAP_W ||
-				 map[tmp.x + pos.y][tmp.y + pos.x]))
+			if (tetr->tetr[tmp.y + 4 * tmp.x]
+				&& (tmp.y + pos.x < 0 ||
+				tmp.y + pos.x >= MAP_W ||
+				tmp.x + pos.y < 0 ||
+				tmp.x + pos.y >= MAP_W ||
+				map[tmp.x + pos.y][tmp.y + pos.x]))
 				return (0);
 			tmp.y++;
 		}
@@ -67,11 +69,11 @@ int		add_tetr_map(t_tetr *tetr, t_2ipair pos, char **map)
 	return (1);
 }
 
-void			update_sol(t_static_backtrack *v, char **sol, char **map)
+void	update_sol(t_static_backtrack *v, char **sol, char **map)
 {
 	t_2ipair	tmp;
 
-	v->area = v->n_area;;
+	v->area = v->n_area;
 	v->score = v->n_score;
 	tmp.x = 0;
 	while (tmp.x < MAP_W)
@@ -113,7 +115,7 @@ int		get_max_width(char **map)
 	return (max.x > max.y ? max.x : max.y);
 }
 
-void			print_sol(char **sol)
+void	print_sol(char **sol)
 {
 	t_2ipair	max;
 	t_2ipair	tmp;
