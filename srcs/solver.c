@@ -6,62 +6,12 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/17 23:06:07 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:14:05 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
-
-int		get_max_width(char **map)
-{
-	t_2ipair	tmp;
-	t_2ipair	max;
-
-	max.x = 0;
-	max.y = 0;
-	tmp.x = 0;
-	while (tmp.x < MAP_W)
-	{
-		tmp.y = 0;
-		while (tmp.y < MAP_W)
-		{
-			if (map[tmp.x][tmp.y])
-			{
-				max.x = tmp.x > max.x ? tmp.x : max.x;
-				max.y = tmp.y > max.y ? tmp.y : max.y;
-			}
-			tmp.y++;
-		}
-		tmp.x++;
-	}
-	max.x += 1;
-	max.y += 1;
-	return (max.x > max.y ? max.x : max.y);
-}
-
-void			print_sol(char **sol)
-{
-	t_2ipair	max;
-	t_2ipair	tmp;
-
-	max.x = get_max_width(sol);
-	tmp.x = 0;
-	while (tmp.x < max.x)
-	{
-		tmp.y = 0;
-		while (tmp.y < max.x)
-		{
-			if (sol[tmp.x][tmp.y])
-				ft_putchar(sol[tmp.x][tmp.y]);
-			else
-				ft_putchar('.');
-			tmp.y++;
-		}
-		ft_putchar('\n');
-		tmp.x++;
-	}
-}
 
 void	fillit_solve(t_list *tetrs)
 {
@@ -109,7 +59,8 @@ void	backtrack(t_list *tetrs, char **map, char **sol, double c)
 					{
 						if (add_tetr_map((char *)tetrs->content, pos, anchor, map))
 						{
-							int a = get_area(map);
+							int a = get_max_width(map);
+							a *= a;
 							n_score += c * (pos.x + 5 * pos.y - anchor.x - 5 * anchor.y);
 							if (a < area || (a == area &&  n_score < score))
 							{

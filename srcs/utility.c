@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/17 23:04:59 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:14:22 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void			update_sol(int *area, char **sol, char **map)
 	t_2ipair	tmp;
 	int			n_area;
 
-	n_area = get_area(map);
+	n_area = get_max_width(map);
+	n_area *= n_area;
 	*area = n_area;;
 	tmp.x = 0;
 	while (tmp.x < MAP_W)
@@ -87,7 +88,7 @@ void			update_sol(int *area, char **sol, char **map)
 	}
 }
 
-int		get_area(char **map)
+int		get_max_width(char **map)
 {
 	t_2ipair	tmp;
 	t_2ipair	max;
@@ -111,7 +112,28 @@ int		get_area(char **map)
 	}
 	max.x += 1;
 	max.y += 1;
-	if (max.x > max.y)
-		return (max.x * max.x);
-	return (max.y * max.y);
+	return (max.x > max.y ? max.x : max.y);
+}
+
+void			print_sol(char **sol)
+{
+	t_2ipair	max;
+	t_2ipair	tmp;
+
+	max.x = get_max_width(sol);
+	tmp.x = 0;
+	while (tmp.x < max.x)
+	{
+		tmp.y = 0;
+		while (tmp.y < max.x)
+		{
+			if (sol[tmp.x][tmp.y])
+				ft_putchar(sol[tmp.x][tmp.y]);
+			else
+				ft_putchar('.');
+			tmp.y++;
+		}
+		ft_putchar('\n');
+		tmp.x++;
+	}
 }
