@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/16 04:03:05 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:04:48 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ void			fillit_solve(t_list *l);
 
 void			update_sol(int *area, char **sol, char **map);
 
-void			update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
+void			update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map, t_bool mode);
 
 int				add_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
-
-void			rm_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map);
 
 void			backtrack(t_list *tetrs, char **map, char **sol, double c);
 

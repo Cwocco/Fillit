@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/16 04:05:04 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:06:07 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	backtrack(t_list *tetrs, char **map, char **sol, double c)
 								}
 							}
 							n_score -= c * (pos.x + 5 * pos.y - anchor.x - 5 * anchor.y);
-							rm_tetr_map((char *)tetrs->content, pos, anchor, map);
+							update_map((char *)tetrs->content, pos, anchor, map, 1);
 						}
 						anchor.y--;
 					}

@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/16 02:23:46 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:04:59 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void	update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
+void	update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map, t_bool mode)
 {
 	t_2ipair	tmp;
 
@@ -30,7 +30,12 @@ void	update_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
 					&& tmp.x + pos.y - anchor.y < MAP_W
 					&& tmp.y + pos.x - anchor.x < MAP_W
 					&& tetr[tmp.y + 4 * tmp.x])
-				map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x] = tetr[tmp.y + 4 * tmp.x];
+			{
+				if (!mode)
+					map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x] = tetr[tmp.y + 4 * tmp.x];
+				else
+					map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x] = 0;
+			}
 			tmp.y++;
 		}
 		tmp.x++;
@@ -58,30 +63,8 @@ int		add_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
 		}
 		tmp.x++;
 	}
-	update_map(tetr, pos, anchor, map);
+	update_map(tetr, pos, anchor, map, 0);
 	return (1);
-}
-
-void	rm_tetr_map(char *tetr, t_2ipair pos, t_2ipair anchor, char **map)
-{
-	t_2ipair	tmp;
-
-	tmp.x = 0;
-	while (tmp.x < 4)
-	{
-		tmp.y = 0;
-		while (tmp.y < 4)
-		{
-			if (tetr[tmp.y + 4 * tmp.x] &&
-				 tmp.y + pos.x - anchor.x >= 0 &&
-				 tmp.y + pos.x - anchor.x < MAP_W &&
-				 tmp.x + pos.y - anchor.y >= 0 &&
-				 tmp.x + pos.y - anchor.y < MAP_W)
-			map[tmp.x + pos.y - anchor.y][tmp.y + pos.x - anchor.x] = 0;
-			tmp.y++;
-		}
-		tmp.x++;
-	}
 }
 
 void			update_sol(int *area, char **sol, char **map)
