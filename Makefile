@@ -33,7 +33,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft
-	$(CC) $(FLG) $(LIB) $(INC) $(SRC) -lft -o $(NAME) -O3 -g
+	$(CC) $(FLG) $(LIB) $(INC) $(SRC) -lft -o $(NAME) -O3
 
 clean:
 	make -C libft clean
