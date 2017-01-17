@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/17 23:26:39 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:48:11 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ typedef struct	s_tetr
 	char		*tetr;
 }				t_tetr;
 
+typedef struct	s_static_backtrack
+{
+	int			area;
+	int			n_area;
+	double		score;
+	double		n_score;
+}				t_static_backtrack;
+
 int				ft_check_contact(char *s);
 
 int 			ft_check_tetri(char *buf);
@@ -35,7 +43,7 @@ t_list			*ft_read(char *path);
 char			*get_tetr_map(char *buffer, char letter);
 
 
-void			update_sol(int *area, char **sol, char **map);
+void			update_sol(t_static_backtrack *v, char **sol, char **map);
 
 void			update_map(t_tetr *tetr, t_2ipair pos, char **map, t_bool mode);
 

@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/17 23:29:04 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/17 23:48:15 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,12 @@ int		add_tetr_map(t_tetr *tetr, t_2ipair pos, char **map)
 	return (1);
 }
 
-void			update_sol(int *area, char **sol, char **map)
+void			update_sol(t_static_backtrack *v, char **sol, char **map)
 {
 	t_2ipair	tmp;
-	int			n_area;
 
-	n_area = get_max_width(map);
-	n_area *= n_area;
-	*area = n_area;;
+	v->area = v->n_area;;
+	v->score = v->n_score;
 	tmp.x = 0;
 	while (tmp.x < MAP_W)
 	{

@@ -6,12 +6,25 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/17 23:33:35 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 00:09:12 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
+
+static void		init_static_v(t_static_backtrack *v)
+{
+	v->area = 0x7fffffff;
+	v->score = 0x7fffffff;
+}
+
+static void		updt_static_value(t_static_backtrack *v, char **map, double val)
+{
+	v->n_area = get_max_width(map);
+	v->n_area *= v->n_area;
+	v->n_score += val;
+}
 
 void	fillit_solve(t_list *tetrs)
 {
@@ -34,43 +47,28 @@ void	fillit_solve(t_list *tetrs)
 
 void	backtrack(t_list *tetrs, char **map, char **sol, double c)
 {
-	static int		area;
-	static double	score;
-	static double	n_score;
-	t_2ipair		pos;
-	int				a;
+	static t_static_backtrack	v;
+	t_2ipair					pos;
 
-	if (!area)
+	if (!v.area)
+		init_static_v(&v);
+	pos.x = -1;
+	while (++pos.x < MAP_W)
 	{
-		area = 0x7fffffff;
-		score = 0x7fffffff;
-	}
-	pos.x = 0;
-	while (pos.x < MAP_W)
-	{
-		pos.y = 0;
-		while (pos.y < MAP_W)
-		{
+		pos.y = -1;
+		while (++pos.y < MAP_W)
 			if (add_tetr_map((t_tetr *)tetrs->content, pos, map))
 			{
-				a = get_max_width(map);
-				a *= a;
-				n_score += c * (pos.x + 5 * pos.y);
-				if (a < area || (a == area &&  n_score < score))
+				updt_static_value(&v, map, c * (pos.x + 5 * pos.y));
+				if (v.n_area < v.area || (v.n_area == v.area &&  v.n_score < v.score))
 				{
 					if (tetrs->next != NULL)
 						backtrack(tetrs->next, map, sol, c / 10);
 					else
-					{
-						update_sol(&area, sol, map);
-						score = n_score;
-					}
+						update_sol(&v, sol, map);
 				}
-				n_score -= c * (pos.x + 5 * pos.y);
+				v.n_score -= c * (pos.x + 5 * pos.y);
 				update_map((t_tetr *)tetrs->content, pos, map, 1);
 			}
-			pos.y++;
-		}
-		pos.x++;
 	}
 }
