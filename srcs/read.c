@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/16 04:10:33 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 04:03:22 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_list		*ft_read(char *path)
 		path = 0;
 		if (letter > 'Z' || ft_check_tetri(buffer))
 			ft_error(2);
-		ft_lst_push_back(&tetrs, (void *)get_tetr_map(buffer, letter++), 16);
+		ft_lst_push_back(&tetrs, (void *)get_tetr(buffer, letter++), 16);
 		if (read(fd, (void *)buffer, 1) == 1)
 		{
 			if (buffer[0] != '\n')
@@ -90,27 +90,51 @@ t_list		*ft_read(char *path)
 	return (tetrs);
 }
 
-char		*get_tetr_map(char *buffer, char letter)
+t_tetr		*get_tetr(char *buffer, char letter)
 {
-	char	*map;
-	int		i;
-	int		j;
+	t_tetr		*tetr;
+	t_2ipair	max;
+	t_2ipair	min;
+	t_2ipair	tmp;
 
-	if(!(map = (char *)malloc(sizeof(char) * (16))))
-		ft_error(2);
-	i = 0;
-	j = 0;
-	while (i < 20)
+	tetr = (t_tetr *)malloc(sizeof(t_tetr));
+	tmp.y = 0;
+	min.x = 10000;
+	min.y = 10000;
+	max.x = 0;
+	max.y = 0;
+	while (tmp.y < 4)
 	{
-		if (j != 4 && j != 9 && j != 14)
+		tmp.x = 0;
+		while (tmp.x < 4)
 		{
-			if (buffer[j] == '#')
-				map[i] = letter;
-			else
-				map[i] = 0;
-			i++;
+			if (buffer[tmp.x + 5 * tmp.y] == '#')
+			{
+				max.x = tmp.x > max.x ? tmp.x : max.x;
+				max.y = tmp.y > max.y ? tmp.y : max.y;
+				min.x = tmp.x < min.x ? tmp.x : min.x;
+				min.y = tmp.y < min.y ? tmp.y : min.y;
+			}
+			tmp.x++;
 		}
-		j++;
+		tmp.y++;
 	}
-	return (map);
+	tetr->size.x = max.x - min.x + 1;
+	tetr->size.y = max.y - min.y + 1;
+	tetr->tetr = (char *)malloc(sizeof(char) * tetr->size.x * tetr->size.y);
+	tmp.y = 0;
+	while (tmp.y < tetr->size.y)
+	{
+		tmp.x = 0;
+		while (tmp.x < tetr->size.x)
+		{
+			if (buffer[tmp.x + min.x  + 5 * (tmp.y + min.y)] == '#')
+				tetr->tetr[tmp.x + tetr->size.x * tmp.y] = letter;
+			else
+				tetr->tetr[tmp.x + tetr->size.x * tmp.y] = 0;
+			tmp.x++;
+		}
+		tmp.y++;
+	}
+	return (tetr);
 }

@@ -6,7 +6,7 @@
 /*   By: nboste <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 20:45:34 by nboste            #+#    #+#             */
-/*   Updated: 2017/01/18 00:30:40 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 04:08:37 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,14 @@ void			backtrack(t_list *tetrs, char **map, char **sol, double c)
 
 	if (!v.area)
 		init_static_v(&v);
-	pos.x = -1;
-	while (++pos.x < MAP_W)
+	pos.y = -1;
+	while (++pos.y < MAP_W)
 	{
-		pos.y = -1;
-		while (++pos.y < MAP_W)
+		pos.x = -1;
+		while (++pos.x < MAP_W)
 			if (add_tetr_map((t_tetr *)tetrs->content, pos, map))
 			{
-				updt_static_value(&v, map, c * (pos.x + 5 * pos.y));
+				updt_static_value(&v, map, c * (2 * pos.x + 15 * pos.y));
 				if (v.n_area < v.area
 						|| (v.n_area == v.area && v.n_score < v.score))
 				{
@@ -68,7 +68,7 @@ void			backtrack(t_list *tetrs, char **map, char **sol, double c)
 					else
 						update_sol(&v, sol, map);
 				}
-				v.n_score -= c * (pos.x + 5 * pos.y);
+				v.n_score -= c * (2 * pos.x + 15 * pos.y);
 				update_map((t_tetr *)tetrs->content, pos, map, 1);
 			}
 	}

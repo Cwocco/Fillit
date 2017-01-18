@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/18 00:34:49 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 02:14:54 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,12 @@ void	update_map(t_tetr *tetr, t_2ipair pos, char **map, t_bool mode)
 		tmp.y = 0;
 		while (tmp.y < tetr->size.x)
 		{
-			if (tmp.x + pos.y >= 0
-					&& tmp.y + pos.x >= 0
-					&& tmp.x + pos.y < MAP_W
-					&& tmp.y + pos.x < MAP_W
-					&& tetr->tetr[tmp.y + 4 * tmp.x])
+			if (tmp.x + pos.y < MAP_W && tmp.y + pos.x < MAP_W
+					&& tetr->tetr[tmp.y + tetr->size.x * tmp.x])
 			{
 				t = tetr->tetr;
 				if (!mode)
-					map[tmp.x + pos.y][tmp.y + pos.x] = t[tmp.y + 4 * tmp.x];
+					map[tmp.x + pos.y][tmp.y + pos.x] = t[tmp.y + tetr->size.x * tmp.x];
 				else
 					map[tmp.x + pos.y][tmp.y + pos.x] = 0;
 			}
@@ -54,10 +51,8 @@ int		add_tetr_map(t_tetr *tetr, t_2ipair pos, char **map)
 		tmp.y = 0;
 		while (tmp.y < tetr->size.x)
 		{
-			if (tetr->tetr[tmp.y + 4 * tmp.x]
-				&& (tmp.y + pos.x < 0 ||
-				tmp.y + pos.x >= MAP_W ||
-				tmp.x + pos.y < 0 ||
+			if (tetr->tetr[tmp.y + tetr->size.x * tmp.x]
+				&& (tmp.y + pos.x >= MAP_W ||
 				tmp.x + pos.y >= MAP_W ||
 				map[tmp.x + pos.y][tmp.y + pos.x]))
 				return (0);

@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/18 00:29:01 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 00:50:58 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			ft_error(int e);
 
 t_list			*ft_read(char *path);
 
-char			*get_tetr_map(char *buffer, char letter);
+t_tetr			*get_tetr(char *buffer, char letter);
 
 void			update_sol(t_static_backtrack *v, char **sol, char **map);
 
