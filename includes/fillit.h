@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:40:13 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/18 00:50:58 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 04:40:47 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,7 @@ void			print_sol(char **sol);
 void			fillit_solve(t_list *l);
 
 void			backtrack(t_list *tetrs, char **map, char **sol, double c);
+
+void			get_min_max(char *buffer, t_2ipair *min, t_2ipair *max);
 
 #endif

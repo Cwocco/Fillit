@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 05:02:08 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/18 02:14:54 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 04:47:11 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	update_map(t_tetr *tetr, t_2ipair pos, char **map, t_bool mode)
 {
 	t_2ipair	tmp;
-	char		*t;
+	char		t;
 
 	tmp.x = 0;
 	while (tmp.x < tetr->size.y)
@@ -29,9 +29,11 @@ void	update_map(t_tetr *tetr, t_2ipair pos, char **map, t_bool mode)
 			if (tmp.x + pos.y < MAP_W && tmp.y + pos.x < MAP_W
 					&& tetr->tetr[tmp.y + tetr->size.x * tmp.x])
 			{
-				t = tetr->tetr;
 				if (!mode)
-					map[tmp.x + pos.y][tmp.y + pos.x] = t[tmp.y + tetr->size.x * tmp.x];
+				{
+					t = tetr->tetr[tmp.y + tetr->size.x * tmp.x];
+					map[tmp.x + pos.y][tmp.y + pos.x] = t;
+				}
 				else
 					map[tmp.x + pos.y][tmp.y + pos.x] = 0;
 			}

@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/08/14 14:44:03 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/18 04:03:22 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/18 04:43:51 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			ft_check_contact(char *s)
 	return (contact == 6 || contact == 8);
 }
 
-int ft_check_tetri(char *buf)
+int			ft_check_tetri(char *buf)
 {
 	int i;
 
@@ -78,11 +78,9 @@ t_list		*ft_read(char *path)
 			ft_error(2);
 		ft_lst_push_back(&tetrs, (void *)get_tetr(buffer, letter++), 16);
 		if (read(fd, (void *)buffer, 1) == 1)
-		{
-			if (buffer[0] != '\n')
-				ft_error(2);
 			path = (char *)1;
-		}
+		if (path && buffer[0] != '\n')
+			ft_error(2);
 		ft_bzero(buffer, 20);
 	}
 	if (path || !tetrs)
@@ -97,28 +95,8 @@ t_tetr		*get_tetr(char *buffer, char letter)
 	t_2ipair	min;
 	t_2ipair	tmp;
 
+	get_min_max(buffer, &min, &max);
 	tetr = (t_tetr *)malloc(sizeof(t_tetr));
-	tmp.y = 0;
-	min.x = 10000;
-	min.y = 10000;
-	max.x = 0;
-	max.y = 0;
-	while (tmp.y < 4)
-	{
-		tmp.x = 0;
-		while (tmp.x < 4)
-		{
-			if (buffer[tmp.x + 5 * tmp.y] == '#')
-			{
-				max.x = tmp.x > max.x ? tmp.x : max.x;
-				max.y = tmp.y > max.y ? tmp.y : max.y;
-				min.x = tmp.x < min.x ? tmp.x : min.x;
-				min.y = tmp.y < min.y ? tmp.y : min.y;
-			}
-			tmp.x++;
-		}
-		tmp.y++;
-	}
 	tetr->size.x = max.x - min.x + 1;
 	tetr->size.y = max.y - min.y + 1;
 	tetr->tetr = (char *)malloc(sizeof(char) * tetr->size.x * tetr->size.y);
@@ -128,7 +106,7 @@ t_tetr		*get_tetr(char *buffer, char letter)
 		tmp.x = 0;
 		while (tmp.x < tetr->size.x)
 		{
-			if (buffer[tmp.x + min.x  + 5 * (tmp.y + min.y)] == '#')
+			if (buffer[tmp.x + min.x + 5 * (tmp.y + min.y)] == '#')
 				tetr->tetr[tmp.x + tetr->size.x * tmp.y] = letter;
 			else
 				tetr->tetr[tmp.x + tetr->size.x * tmp.y] = 0;
@@ -137,4 +115,31 @@ t_tetr		*get_tetr(char *buffer, char letter)
 		tmp.y++;
 	}
 	return (tetr);
+}
+
+void		get_min_max(char *buffer, t_2ipair *min, t_2ipair *max)
+{
+	t_2ipair	tmp;
+
+	min->x = 0x7fffffff;
+	min->y = 0x7fffffff;
+	max->x = 0;
+	max->y = 0;
+	tmp.y = 0;
+	while (tmp.y < 4)
+	{
+		tmp.x = 0;
+		while (tmp.x < 4)
+		{
+			if (buffer[tmp.x + 5 * tmp.y] == '#')
+			{
+				max->x = tmp.x > max->x ? tmp.x : max->x;
+				max->y = tmp.y > max->y ? tmp.y : max->y;
+				min->x = tmp.x < min->x ? tmp.x : min->x;
+				min->y = tmp.y < min->y ? tmp.y : min->y;
+			}
+			tmp.x++;
+		}
+		tmp.y++;
+	}
 }
