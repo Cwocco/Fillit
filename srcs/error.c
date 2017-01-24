@@ -6,7 +6,7 @@
 /*   By: ada-cunh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 23:23:29 by ada-cunh          #+#    #+#             */
-/*   Updated: 2017/01/18 00:29:23 by nboste           ###   ########.fr       */
+/*   Updated: 2017/01/24 22:25:26 by nboste           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_error(int e)
 	}
 	else if (e == 2)
 	{
-		ft_putstr("error");
+		ft_putstr("error\n");
 		exit(EXIT_FAILURE);
 	}
 }
